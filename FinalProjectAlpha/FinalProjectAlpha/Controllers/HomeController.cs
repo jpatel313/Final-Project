@@ -26,5 +26,12 @@ namespace FinalProjectAlpha.Controllers
 
             return View();
         }
+
+        public ActionResult Savepage()
+        {
+            ViewBag.Message = "My ViewBag.Message";
+
+            return View();
+        }
     }
 }

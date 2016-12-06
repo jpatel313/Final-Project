@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using FinalProjectAlpha.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,18 +23,18 @@ namespace FinalProjectAlpha.Controllers
         }
         public ActionResult Save(string Link, string RepoLink, string ShortDesc, string LongDesc)
         {
-            ArchiveDBEntities dbContext = new ArchiveBEntities();
-
-            string ArchiveLink = archiveLink(Link);   //get Link from Jay's ArchiveLink()
-
-            dbContext.Projects.Add(p);
-
+            //get db
+            waybackdbEntities dbContext = new waybackdbEntities();
+            //get Link from Jay's ArchiveLink()
+            string ArchiveLink = archiveLink(Link);
+            //add Archive obj to db
+            Archive archive = new Archive(Link, ArchiveLink, RepoLink, ShortDesc, LongDesc);
+            dbContext.Archives.Add(archive);
+            //save to db
             dbContext.SaveChanges();
+            //send user to Project/Details 
+            return RedirectToAction("Details", Link);
 
-
-
-           return RedirectToAction("Details", Link);
-           
         }
 
         public void saveLink(string inputUrl)

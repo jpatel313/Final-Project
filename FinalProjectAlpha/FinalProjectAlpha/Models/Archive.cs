@@ -29,6 +29,13 @@ namespace FinalProjectAlpha.Models
             ArchiveLink = archiveLink;
             ShortDesc = shortDesc;
         }
+        public Archive(string link, string repoLink, string shortDesc, string longDesc)
+        {
+            Link = link;
+            repoLink = RepoLink;
+            ShortDesc = shortDesc;
+            LongDesc = longDesc;
+        }
 
         public string Link { get; set; } 
         public string ArchiveLink { get; set; }

@@ -17,7 +17,7 @@ namespace FinalProjectAlpha.Controllers
         {
             return View();
         }
-        public ActionResult Save(/*Data types and stuff here.*/)
+        public ActionResult Save(string Link, string RepoLink, string ShortDesc, string LongDesc)
         {
 
             //creates new Archive

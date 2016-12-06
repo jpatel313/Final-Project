@@ -27,8 +27,28 @@ namespace FinalProjectAlpha.Controllers
             return View();
         }
 
-        public ActionResult Savepage()
+
+        public string Myreturnstringmethod(string myvariable)
         {
+            string hello = myvariable;
+
+            return myvariable;
+        }
+
+        public string Myreturnstringmethod2(string myvariable, string secondvariable)
+        {
+            string hello = myvariable;
+
+            return myvariable;
+        }
+
+        public ActionResult Savepage(string link, string githublink)
+        {
+
+            Myreturnstringmethod(link);
+
+            Myreturnstringmethod2(link, githublink);
+
             ViewBag.Message = "My ViewBag.Message";
 
             return View();

@@ -19,12 +19,16 @@ namespace FinalProjectAlpha.Controllers
         }
         public ActionResult Save(string Link, string RepoLink, string ShortDesc, string LongDesc)
         {
+            ArchiveDBEntities dbContext = new ArchiveBEntities();
 
-            //creates new Archive
-            //adds archive to DB
-            //redirects to Main/Index (Or whatever the homepage is)
+            string ArchiveLink = archiveLink(Link);   //get Link from Jay's ArchiveLink()
 
-            return View();
+            dbContext.Projects.Add(p);
+
+            dbContext.SaveChanges();
+
+           return RedirectToAction("Details", Link);
+           
         }
     }
 }

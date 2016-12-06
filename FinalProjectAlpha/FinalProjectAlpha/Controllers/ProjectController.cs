@@ -25,14 +25,21 @@ namespace FinalProjectAlpha.Controllers
         {
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
+
+            saveLink(Link);
+
             //get Link from Jay's ArchiveLink()
             string ArchiveLink = archiveLink(Link);
             //add Archive obj to db
             Archive archive = new Archive(Link, ArchiveLink, RepoLink, ShortDesc, LongDesc);
+
+
             dbContext.Archives.Add(archive);
             //save to db
             dbContext.SaveChanges();
             //send user to Project/Details 
+
+
             return RedirectToAction("Details", Link);
 
         }

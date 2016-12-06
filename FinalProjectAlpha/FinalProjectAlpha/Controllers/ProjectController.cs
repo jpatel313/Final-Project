@@ -37,7 +37,7 @@ namespace FinalProjectAlpha.Controllers
         }
 
         public void saveLink(string inputUrl)
-        {
+        {     
             // Create a request for the URL. 
             string url = "https://web.archive.org/save/" + inputUrl;
 

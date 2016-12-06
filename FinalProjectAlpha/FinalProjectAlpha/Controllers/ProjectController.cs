@@ -39,17 +39,34 @@ namespace FinalProjectAlpha.Controllers
         public void saveLink(string inputUrl)
         {     
             // Create a request for the URL. 
-            string url = "https://web.archive.org/save/" + inputUrl;
-
-
+            string url = "http://archive.org/wayback/available?url=" + inputUrl;
+            
             HttpWebRequest request =
             (HttpWebRequest)WebRequest.Create(url);
             request.UserAgent = @"User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
             
             // Get the response.
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            //create object 
+            StreamReader rd = new StreamReader(response.GetResponseStream());
+            string wbackResponse = rd.ReadToEnd();
+            JObject urlRes = JObject.Parse(wbackResponse);
+            string check = (string)urlRes["archived_snapshots"]["available"]; //Not sure, but if we get an error, this may throw an exception
+            if (check == "false") //live but not archived
+            {
+                HttpWebRequest req = WebRequest.CreateHttp("http://archive.org/save/_embed/" + inputUrl);
+                req.UserAgent =
+                @"User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
+            }
+            else if (check == "true")
+            {
 
-            ViewBag.response = response;
+                ViewBag.errormessage = "Sorry, this is archived already.";
+            }
+            else //All of the errors
+            {
+                ViewBag.errorMessage = "Sorry, there is something wrong with the link or server";
+            }
            
 
         }

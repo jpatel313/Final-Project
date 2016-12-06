@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,19 +20,26 @@ namespace FinalProjectAlpha.Controllers
         {
             return View();
         }
-        public ActionResult Save(/*Data types and stuff here.*/)
+        public ActionResult Save(string Link, string RepoLink, string ShortDesc, string LongDesc)
         {
+            ArchiveDBEntities dbContext = new ArchiveBEntities();
 
-            //creates new Archive
-            //adds archive to DB
-            //redirects to Main/Index (Or whatever the homepage is)
+            string ArchiveLink = archiveLink(Link);   //get Link from Jay's ArchiveLink()
 
-            return View();
+            dbContext.Projects.Add(p);
+
+            dbContext.SaveChanges();
+
+
+
+           return RedirectToAction("Details", Link);
+           
         }
-        public ActionResult saveLink()
+
+        public void saveLink(string inputUrl)
         {
             // Create a request for the URL. 
-            string url = "https://web.archive.org/save/" + "https://www.playbutterfly.com";
+            string url = "https://web.archive.org/save/" + inputUrl;
 
 
             HttpWebRequest request =
@@ -42,9 +50,32 @@ namespace FinalProjectAlpha.Controllers
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
             ViewBag.response = response;
-            return View();
+           
 
         }
 
+        public string archiveLink(string inputUrl)
+        {
+            //Use Wayback Machine Api + users project link
+            HttpWebRequest request = WebRequest.CreateHttp("http://archive.org/wayback/available?url=" + inputUrl);
+            request.UserAgent =
+    @"User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
+
+            //Cast Wayback request to Response.  
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            //Read response Url data and convert into string.
+            StreamReader read = new StreamReader(response.GetResponseStream());
+            string waybackResponse = read.ReadToEnd();
+
+            //Parse from string to object.
+            JObject urlResponse = JObject.Parse(waybackResponse);
+
+            //cast exact part of return url needed and save as archiveUrl string
+            string archiveUrl = (string)urlResponse["archived_snapshots"]["url"];
+
+            return archiveUrl;
+
+        }
     }
 }

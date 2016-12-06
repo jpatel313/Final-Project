@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FinalProjectAlpha.Models;
 
 namespace FinalProjectAlpha.Controllers
 {
@@ -21,17 +22,13 @@ namespace FinalProjectAlpha.Controllers
         }
 
         public ActionResult Contact()
-        {
+        {  
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
 
-        public ActionResult Savepage()
-        {
-            ViewBag.Message = "My ViewBag.Message";
 
-            return View();
-        }
+        
     }
 }

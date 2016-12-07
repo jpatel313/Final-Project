@@ -13,8 +13,21 @@ namespace FinalProjectAlpha.Controllers
     public class ProjectController : Controller
     {
         // GET: Project
-        public ActionResult Details(string PK_Link)
+        public ActionResult Details(string Link)
         {
+            waybackdbEntities dbContext = new waybackdbEntities();
+
+            List<Archive> archiveList = dbContext.Archives.ToList();
+
+            foreach (var item in archiveList)
+            {
+                if (item.Link == Link)
+                {
+                    ViewBag.Archive = item;
+                }
+            }
+            
+
             return View();
         }
         public ActionResult New()

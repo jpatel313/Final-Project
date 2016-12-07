@@ -14,6 +14,9 @@ namespace FinalProjectAlpha.Models
     
     public partial class Archive
     {
+        public Archive()
+        {
+        }
         public Archive(string link, string archiveLink, string repoLink, string shortDesc, string longDesc)
         {
             Link = link;

@@ -75,7 +75,7 @@ namespace FinalProjectAlpha.Controllers
             StreamReader rd = new StreamReader(response.GetResponseStream());
             string wbackResponse = rd.ReadToEnd();
             JObject urlRes = JObject.Parse(wbackResponse);
-            string check = (string)urlRes["archived_snapshots"]["available"]; //Not sure, but if we get an error, this may throw an exception
+            string check = (string)urlRes["archived_snapshots"]["closest"]["available"]; //Not sure, but if we get an error, this may throw an exception
             if (check == "false") //live but not archived
             {
                 HttpWebRequest req = WebRequest.CreateHttp("http://archive.org/save/_embed/" + inputUrl);
@@ -115,7 +115,7 @@ namespace FinalProjectAlpha.Controllers
             JObject urlResponse = JObject.Parse(waybackResponse);
 
             //cast exact part of return url needed and save as archiveUrl string
-            string archiveUrl = (string)urlResponse["archived_snapshots"]["url"];
+            string archiveUrl = (string)urlResponse["archived_snapshots"]["closest"]["url"];
 
             return archiveUrl;
 

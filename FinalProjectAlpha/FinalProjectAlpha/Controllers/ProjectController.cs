@@ -42,14 +42,14 @@ namespace FinalProjectAlpha.Controllers
         {
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
-
-            saveLink(Link);
+            string newLink = "http://" + Link;
+            saveLink(newLink);
 
 
             //get Link from Jay's ArchiveLink()
-            string ArchiveLink = "MyHardcodedArchiveLink";//archiveLink(Link);
+            string ArchiveLink = archiveLink(Link);
             //add Archive obj to db
-            Archive archive = new Archive(Link, ArchiveLink, RepoLink, ShortDesc, LongDesc);
+            Archive archive = new Archive(newLink, ArchiveLink, RepoLink, ShortDesc, LongDesc);
 
 
             dbContext.Archives.Add(archive);

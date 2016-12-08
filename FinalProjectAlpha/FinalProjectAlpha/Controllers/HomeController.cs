@@ -9,8 +9,43 @@ namespace FinalProjectAlpha.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult ViewArchive(string Link)
+        {
+            waybackdbEntities dbContext = new waybackdbEntities();
+
+
+
+
+            List<Archive> archiveList = dbContext.Archives.ToList();
+
+
+
+            foreach (var item in archiveList)
+            {
+                if (item.Link == Link)
+                {
+                    ViewBag.Archive = item;
+                }
+            }
+
+            return View();
+        }
+
         public ActionResult Index()
         {
+
+
+            waybackdbEntities dbContext = new waybackdbEntities();
+
+
+
+
+            List<Archive> archiveList = dbContext.Archives.ToList();
+
+
+            ViewBag.ArList = archiveList;
+
+
             return View();
         }
 
@@ -28,7 +63,7 @@ namespace FinalProjectAlpha.Controllers
             return View();
         }
 
-
         
+
     }
 }

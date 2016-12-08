@@ -1,33 +1,37 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>The Grand Experience</h1>
+    <p class="lead"> Experience the final projects of students at Grand Circus Detroit
+    
+    Attention Alumni!: Archive your projects so they will never be forgotten!
+    </p>
+
+    Take user to login page
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Log in now... &raquo;</a></p>
 </div>
 
 <!-- Page Content -->
 <div class="container">
 
-    <div class="row">
+    @*<div class="row">
 
         <div class="col-md-3">
             <p class="lead">Shop Name</p>
             <div class="list-group">
-                <a href="#" class="list-group-item">Category 1</a>
-                <a href="#" class="list-group-item">Category 2</a>
-                <a href="#" class="list-group-item">Category 3</a>
+                <a href="#" class="item1">.NET Developer Bootcamp</a>
+                <a href="#" class="item2">Java Developer Bootcamp</a>
+                <a href="#" class="item3">Frontend Developer Bootcamp</a>
             </div>
         </div>
 
         <div class="col-md-9">
-
+            @*stretch goals: add function to add latest screenshots here*@
+            
             <div class="row carousel-holder">
 
                 <div class="col-md-12">
-                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <div id="carousel-NET" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                             <li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -54,20 +58,34 @@
                 </div>
 
             </div>
-
+           
             <div class="row">
+                @*div class "444 archive" to hold view of user project data*@
+                @*Stretch goal: have a controller action to automatically add new projects*@
 
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
+                <div class="444 archive">
+                    <div class="thumb">
+                        @*project screenshot placeholder:*@
+                        <img src="http://sparseproject.com/wp-content/uploads/2015/03/Project1.jpg" alt="">
+                    
                         <div class="caption">
-                            <h4 class="pull-right">$24.99</h4>
-                            <h4>
-                                <a href="#">First Product</a>
-                            </h4>
-                            <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                            @foreach (var item in ViewBag.ArList)
+                            {
+                            <h4 class="pull-right">Grand Circus Developer Bootcamp Final Project</h4>
+
+                            <a href="@item.Link">@item.Link</a>
+
+
+
+                            @*Short project description under link and screenshot*@
+                            <p>@item.ShortDesc</p>
+
+                          
+                            }
                         </div>
-                        <div class="ratings">
+
+                        @*All projects are 5 stars:*@
+                        @*<div class="ratings">
                             <p class="pull-right">15 reviews</p>
                             <p>
                                 <span class="glyphicon glyphicon-star"></span>
@@ -76,11 +94,12 @@
                                 <span class="glyphicon glyphicon-star"></span>
                                 <span class="glyphicon glyphicon-star"></span>
                             </p>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
 
-                <div class="col-sm-4 col-lg-4 col-md-4">
+
+                @*<div class="444 archive">
                     <div class="thumbnail">
                         <img src="http://placehold.it/320x150" alt="">
                         <div class="caption">
@@ -103,7 +122,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="444 archive">
                     <div class="thumbnail">
                         <img src="http://placehold.it/320x150" alt="">
                         <div class="caption">
@@ -126,7 +145,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="444 archive">
                     <div class="thumbnail">
                         <img src="http://placehold.it/320x150" alt="">
                         <div class="caption">
@@ -149,7 +168,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="444 archive">
                     <div class="thumbnail">
                         <img src="http://placehold.it/320x150" alt="">
                         <div class="caption">
@@ -170,21 +189,21 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </div>*@
 
-                <div class="col-sm-4 col-lg-4 col-md-4">
+                @*<div class="col-sm-4 col-lg-4 col-md-4">
                     <h4>
                         <a href="#">Like this template?</a>
                     </h4>
                     <p>If you like this template, then check out <a target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this tutorial</a> on how to build a working review system for your online store!</p>
                     <a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View Tutorial</a>
-                </div>
+                </div>*@
 
             </div>
 
         </div>
 
-    </div>
 
-</div>
-<!-- /.container -->
+
+
+ /.container

@@ -1,0 +1,206 @@
+[33mcommit 268cae00897821171d25ff87f926e173059d8026[m
+Author: J Patel <J Patel>
+Date:   Thu Dec 8 15:30:55 2016 -0500
+
+    edited frontpage
+
+[33mcommit e02a10204e15fd9c39e75b26bf1bca5415d6d063[m
+Author: Mary Olive <mary.olive@me.com>
+Date:   Thu Dec 8 15:07:07 2016 -0500
+
+    rem dll
+
+[33mcommit 862d03860f15da5ef272d345f2ec1e5876fd4203[m
+Merge: 001157b 96f13f8
+Author: tundelola <foladayo@aol.com>
+Date:   Thu Dec 8 15:00:50 2016 -0500
+
+    Merge branch 'master' of https://github.com/jpatel313/Final-Project
+
+[33mcommit 001157b0773ec9025136a2470e241240ef75f479[m
+Author: tundelola <foladayo@aol.com>
+Date:   Thu Dec 8 14:57:49 2016 -0500
+
+    update form
+
+[33mcommit 96f13f82e919ce7a30d72fe4696d8083368a0d4b[m
+Author: J Patel <J Patel>
+Date:   Thu Dec 8 13:40:47 2016 -0500
+
+    working home/index file
+
+[33mcommit 758d0ae187fdbbba818a2913b09d3911b3a03084[m
+Author: J Patel <J Patel>
+Date:   Thu Dec 8 11:50:24 2016 -0500
+
+    json path fix
+
+[33mcommit c1a9a5cd42e27549201920f09db2f5c48e9a96ab[m
+Author: J Patel <J Patel>
+Date:   Thu Dec 8 10:15:24 2016 -0500
+
+    fixed shared view new page
+
+[33mcommit 8b867ca29df59eff3dd17f97c7a5c06d1ae33e19[m
+Author: J Patel <J Patel>
+Date:   Thu Dec 8 09:40:15 2016 -0500
+
+    fixed save link
+
+[33mcommit 702c4803465a6adaf84ce19a6b71ecac0f6020ce[m
+Merge: 6f8149b 35ab782
+Author: Thomas Justin Krueger <Tomjk@acdmail.com>
+Date:   Thu Dec 8 09:26:56 2016 -0500
+
+    Merge branch 'master' of https://github.com/jpatel313/Final-Project
+
+[33mcommit 6f8149b660dd7194a6a08768da4ba0ac23b348e5[m
+Author: Thomas Justin Krueger <Tomjk@acdmail.com>
+Date:   Thu Dec 8 09:26:31 2016 -0500
+
+    Reconfigured Web.Config
+
+[33mcommit 35ab782d28b2c03127d3ad56d769967215e5be07[m
+Merge: ab7f2a7 54f3cc7
+Author: Mary Olive <mary.olive@me.com>
+Date:   Wed Dec 7 15:03:23 2016 -0500
+
+    Merge branch 'master' of https://github.com/jpatel313/Final-Project
+
+[33mcommit 54f3cc7ab9e6f15df50cf731ead9bf5d3650fb7c[m
+Author: Thomas Justin Krueger <Tomjk@acdmail.com>
+Date:   Wed Dec 7 15:01:23 2016 -0500
+
+    Added Details View
+
+[33mcommit ab7f2a7fa164013dbe69c048a31526a5d1a84bb6[m
+Merge: 4233191 5968027
+Author: Mary Olive <mary.olive@me.com>
+Date:   Wed Dec 7 14:51:51 2016 -0500
+
+    Merge branch 'master' of https://github.com/jpatel313/Final-Project
+
+[33mcommit 4233191865571276bac81598f89aba770cf5fe4d[m
+Author: Mary Olive <mary.olive@me.com>
+Date:   Wed Dec 7 14:48:02 2016 -0500
+
+    Create form on New and minor corrections in ProjectController (pairprogram)
+
+[33mcommit 59680274620a4647697e603b467d94a62cef9374[m
+Author: Thomas Justin Krueger <Tomjk@acdmail.com>
+Date:   Wed Dec 7 11:09:31 2016 -0500
+
+    Deleted .vs Folder, Deleted Save View. Added "Details" ActionResult
+
+[33mcommit 541a311b37b19c9564025eb5a41ec9d4db86f6dc[m
+Merge: 02d7852 bad4f86
+Author: Thomas Justin Krueger <Tomjk@acdmail.com>
+Date:   Tue Dec 6 17:02:02 2016 -0500
+
+    Merge branch 'master' of https://github.com/jpatel313/Final-Project
+
+[33mcommit 02d7852f6d75c95018053a3f90c6c0f09fb0b95a[m
+Author: Thomas Justin Krueger <Tomjk@acdmail.com>
+Date:   Tue Dec 6 17:01:52 2016 -0500
+
+    minor changes to save action
+
+[33mcommit bad4f8687091accde1e2534c7335254957a607e7[m
+Merge: 8512672 d8d91cd
+Author: tundelola <foladayo@aol.com>
+Date:   Tue Dec 6 17:00:07 2016 -0500
+
+    Merge branch 'master' of https://github.com/jpatel313/Final-Project
+
+[33mcommit 8512672fa178f7635333ffb679773ef0858a60f8[m
+Author: tundelola <foladayo@aol.com>
+Date:   Tue Dec 6 16:58:54 2016 -0500
+
+    New changes
+
+[33mcommit d8d91cdad819bcdfbc093c6d7ffb7505ad8099d8[m
+Author: Mary Olive <mary.olive@me.com>
+Date:   Tue Dec 6 16:00:46 2016 -0500
+
+    Update Save Action and Add Constructor to Archive
+
+[33mcommit 716b9fe5ff98357797de9c6d99c9adc6637f347b[m
+Author: tundelola <foladayo@aol.com>
+Date:   Tue Dec 6 15:37:13 2016 -0500
+
+    savelink
+
+[33mcommit e0d6c9ca9502d9579d9a50349f8a7fc33350e000[m
+Merge: d61a919 02c78d2
+Author: tundelola <foladayo@aol.com>
+Date:   Tue Dec 6 15:26:23 2016 -0500
+
+    Merge Project
+
+[33mcommit d61a9191f7682a08d39f4dc98ad7598402de195d[m
+Author: tundelola <foladayo@aol.com>
+Date:   Tue Dec 6 15:17:04 2016 -0500
+
+    merge with master
+
+[33mcommit 6e035a7843e9bc39292ea872f84c375e94c0d0e0[m
+Author: tundelola <foladayo@aol.com>
+Date:   Tue Dec 6 14:57:41 2016 -0500
+
+    changes to final project
+
+[33mcommit 02c78d21b32203741b4ca4d970d29a78d774f52d[m
+Merge: 746dff1 c32c6a7
+Author: Thomas Justin Krueger <Tomjk@acdmail.com>
+Date:   Tue Dec 6 14:16:55 2016 -0500
+
+    Merge branch 'master' of https://github.com/jpatel313/Final-Project
+
+[33mcommit c32c6a73d7ffc8e42729a55485426277ccb91b8a[m
+Author: jpatel313 <jcp313@gmail.com>
+Date:   Tue Dec 6 14:06:41 2016 -0500
+
+    update gitignore
+
+[33mcommit 25b533b211c82e18bde60fb9ed8373d009b206f1[m
+Author: Jay Patel <jcp313@gmail.com>
+Date:   Tue Dec 6 13:58:03 2016 -0500
+
+    added archiveLink method
+
+[33mcommit 746dff13f38c209b31eae486c9f780297a8144a7[m
+Merge: a560cb1 a03899d
+Author: Thomas Justin Krueger <Tomjk@acdmail.com>
+Date:   Tue Dec 6 13:47:40 2016 -0500
+
+    Merge branch 'master' of https://github.com/jpatel313/Final-Project
+
+[33mcommit a03899df01c8c84cc8675004957de494b944a852[m
+Author: Mary Olive <mary.olive@me.com>
+Date:   Tue Dec 6 13:25:53 2016 -0500
+
+    Add Save Action
+
+[33mcommit a560cb17479ea3e19f78a70a4bd27cfb614981a3[m
+Author: Thomas Justin Krueger <Tomjk@acdmail.com>
+Date:   Tue Dec 6 12:08:19 2016 -0500
+
+    Added Azure DB, Created Archive Model and Constructors, Removed Test Code.
+
+[33mcommit 58d5cf8adeb2daa2860e636b33a2daba909f31ef[m
+Author: Thomas Justin Krueger <Tomjk@acdmail.com>
+Date:   Tue Dec 6 11:02:05 2016 -0500
+
+    Added Paramaters to Save Action, Deleted Archive Model
+
+[33mcommit 5a59cfa36944835b1a76de8f2cce578be41063c1[m
+Author: Thomas Justin Krueger <Tomjk@acdmail.com>
+Date:   Mon Dec 5 17:11:41 2016 -0500
+
+    Added Project Controller, New, Save and Details views
+
+[33mcommit 35dcf4aefda35f908c85f64b75fedd81b4587224[m
+Author: Thomas Justin Krueger <Tomjk@acdmail.com>
+Date:   Mon Dec 5 15:25:57 2016 -0500
+
+    Inital Commit

@@ -2,6 +2,44 @@
 @{
     ViewBag.Title = "Savepage";
 }
-
+@ViewBag.errorMessage
  
+<div class="content">
+    <form action="Save" method="post">
+        <label for="basic-url">Your full project URL:</label>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon3">https://</span>
+            <input type="text" class="form-control" id="inputURL" aria-describedby="basic-addon3" name="Link" />
+            <span class="input-group-addon">.com</span>
+        </div>
 
+        <br />
+        <label for="basic-url">Your full project repository URL:</label>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon3">https://github.com/</span>
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+                   name="RepoLink">
+        </div>
+
+        <br />
+        <label for="basic-url">Your short project description:</label>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon3">Short project description</span>
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+                   name="ShortDesc">
+        </div>
+        <br />
+        <label for="basic-url">Your Long project description:</label>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon3">Long project description</span>
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+                   name="LongDesc">
+        </div>
+
+
+
+
+        <input type="submit" value="inputURL" />
+    </form>
+        <h3>@ViewBag.errorMessage</h3>
+</div>

@@ -13,6 +13,7 @@ namespace FinalProjectAlpha.Controllers
     public class ProjectController : Controller
     {
         // GET: Project
+        [Authorize(Roles = "Admin, Alumni")]
         public ActionResult Details(string Link)
         {
             waybackdbEntities dbContext = new waybackdbEntities();
@@ -30,10 +31,13 @@ namespace FinalProjectAlpha.Controllers
 
             return View();
         }
+       [Authorize( Roles= "Admin")]
         public ActionResult New()
         {
             return View();
         }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Save(string Link, string RepoLink, string ShortDesc, string LongDesc)
         {
             //get db

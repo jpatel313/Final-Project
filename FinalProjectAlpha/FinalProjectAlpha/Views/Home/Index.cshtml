@@ -2,9 +2,10 @@
 
 <div class="jumbotron">
     <h1>The Grand Experience</h1>
-    <p class="lead"> Experience the final projects of students at Grand Circus Detroit
-    
-    Attention Alumni!: Archive your projects so they will never be forgotten!
+    <p class="lead">
+        Experience the final projects of students at Grand Circus Detroit
+
+        Attention Alumni!: Archive your projects so they will never be forgotten!
     </p>
 
     Take user to login page
@@ -27,189 +28,71 @@
 
         <div class="col-md-9">
             @*stretch goals: add function to add latest screenshots here*@
-            
-            <div class="row carousel-holder">
 
-                <div class="col-md-12">
-                    <div id="carousel-NET" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_02.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_03.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_06.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_05.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_01.jpg" alt="">
-                            </div>
+    <div class="row carousel-holder">
 
-
-                        </div>
-                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                        </a>
-                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                        </a>
+        <div class="col-md-12">
+            <div id="carousel-NET" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_02.jpg" alt="">
                     </div>
-                </div>
+                    <div class="item">
+                        <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_03.jpg" alt="">
+                    </div>
+                    <div class="item">
+                        <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_06.jpg" alt="">
+                    </div>
+                    <div class="item">
+                        <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_05.jpg" alt="">
+                    </div>
+                    <div class="item">
+                        <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_01.jpg" alt="">
+                    </div>
 
+
+                </div>
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
             </div>
-           
-            <div class="row">
-                @*div class "444 archive" to hold view of user project data*@
-                @*Stretch goal: have a controller action to automatically add new projects*@
-
-                <div class="444 archive">
-                    <div class="thumb">
-                        @*project screenshot placeholder:*@
-                        <img src="http://sparseproject.com/wp-content/uploads/2015/03/Project1.jpg" alt="">
-                    
-                        <div class="caption">
-                            @foreach (var item in ViewBag.ArList)
-                            {
-
-                            <h4 class="pull-right">Grand Circus Developer Bootcamp Final Project</h4>
-
-                            <h5>@item.Link</h5>
-                            <a href="@item.Link">Live</a>
-                            <a href="@item.ArchiveLink">Archive</a>
-
-
-
-                            @*Short project description under link and screenshot*@
-                            <p>@item.ShortDesc</p>
-
-                          
-                            }
-                        </div>
-
-                        @*All projects are 5 stars:*@
-                        @*<div class="ratings">
-                            <p class="pull-right">15 reviews</p>
-                            <p>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                            </p>
-                        </div>*@
-                    </div>
-                </div>
-
-
-                @*<div class="444 archive">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4 class="pull-right">$64.99</h4>
-                            <h4>
-                                <a href="#">Second Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">12 reviews</p>
-                            <p>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="444 archive">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4 class="pull-right">$74.99</h4>
-                            <h4>
-                                <a href="#">Third Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">31 reviews</p>
-                            <p>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="444 archive">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4 class="pull-right">$84.99</h4>
-                            <h4>
-                                <a href="#">Fourth Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">6 reviews</p>
-                            <p>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="444 archive">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
-                        <div class="caption">
-                            <h4 class="pull-right">$94.99</h4>
-                            <h4>
-                                <a href="#">Fifth Product</a>
-                            </h4>
-                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                        <div class="ratings">
-                            <p class="pull-right">18 reviews</p>
-                            <p>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>*@
-
-                @*<div class="col-sm-4 col-lg-4 col-md-4">
-                    <h4>
-                        <a href="#">Like this template?</a>
-                    </h4>
-                    <p>If you like this template, then check out <a target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this tutorial</a> on how to build a working review system for your online store!</p>
-                    <a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View Tutorial</a>
-                </div>*@
-
-            </div>
-
         </div>
+
+    </div>
+
+    @*div class "444 archive" to hold view of user project data*@
+    @*Stretch goal: have a controller action to automatically add new projects*@
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @foreach (var item in ViewBag.ArList)
+            {
+
+                <div class="col-sm-3 col-lg-3 col-md-3">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/200x250" alt=""> @*Placeholder, we will get the screenshot here.*@
+                        <div class="caption">
+                            <h4>
+                                @item.Link @*Placeholder, We want a Project NAME here.*@
+                            </h4>
+                            <p>@item.ShortDesc</p>
+                            <p>
+                                <a href="@item.ArchiveLink" class="btn btn-primary btn-sm" role="button">Archive</a>
+                                <a href="Project/Details?Link=@item.Link" class="btn btn-info btn-sm" role="button">Details</a>
+                                <a href="@item.Link" class="btn btn-default btn-sm" role="button">Live</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

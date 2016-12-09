@@ -2,17 +2,22 @@
 @{
     ViewBag.Title = "Details";
 }
+<center>
+    <h2>Details</h2>
+    <h4>@ViewBag.Archive.Link</h4>
+    <h4>@ViewBag.Archive.ArchiveLink</h4>
+    <h4>@ViewBag.Archive.RepoLink</h4>
+    <h4>@ViewBag.Archive.ShortDesc</h4>
+    <h4>@ViewBag.Archive.LongDesc</h4>
 
-<h2>Details</h2>
-<h4>@ViewBag.Archive.Link</h4>
-<h4>@ViewBag.Archive.ArchiveLink</h4>
-<h4>@ViewBag.Archive.RepoLink</h4>
-<h4>@ViewBag.Archive.ShortDesc</h4>
-<h4>@ViewBag.Archive.LongDesc</h4>
 
-@{
-    var base64 = Convert.ToBase64String(ViewBag.ss);
-    var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
-}
-<img src="@imgSrc" />
+    @*Convert byte[] to image*@
 
+    @{
+        var base64 = Convert.ToBase64String(ViewBag.ss);
+        var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
+    }
+
+    <img src="@imgSrc" height="400" width="400" />
+
+</center>

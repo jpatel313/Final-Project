@@ -52,11 +52,14 @@ namespace FinalProjectAlpha.Controllers
             string newLink = "http://" + Link;
             saveLink(newLink);
 
-
             //get Link from Jay's ArchiveLink()
             string ArchiveLink = archiveLink(Link);
+
+            //Call screenshot method, input users website link.
+            byte[] SnapShot = SaveScreen(Link);
+
             //add Archive obj to db
-            Archive archive = new Archive(newLink, ArchiveLink, RepoLink, ShortDesc, LongDesc);
+            Archive archive = new Archive(newLink, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot);
 
             
             dbContext.Archives.Add(archive);
@@ -129,7 +132,7 @@ namespace FinalProjectAlpha.Controllers
 
         }
 
-        public byte[] SaveScreen(string url)
+        public byte[] SaveScreen(string inputUrl)
         {
            // var url = "https://wayne.edu";
 
@@ -138,8 +141,8 @@ namespace FinalProjectAlpha.Controllers
 
             var thread = new Thread(
             () =>
-            {
-                bitmap = ExportUrlToImage(url, 1280, 1024);
+            {   //call ExportToImage Method, set screen capture size
+                bitmap = ExportUrlToImage(inputUrl, 1280, 1024);
             });
 
             thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
@@ -152,8 +155,6 @@ namespace FinalProjectAlpha.Controllers
                 {
                     bitmap.Save(memstream, ImageFormat.Jpeg);
                     result = this.File(memstream.GetBuffer(), "image/jpeg");
-
-                  
                 }
             }
 
@@ -183,25 +184,7 @@ namespace FinalProjectAlpha.Controllers
             return bitmap;
         }
 
-        //screenshot via Freezer Nuget package
-        //public Freezer.Core.Screenshot screenShot(string inputUrl)
-        //{//return type:Freezer.Core.ScreenshotJob
-        //        //convert user link to screenshotjob byte array
-        //var screenshotJob = ScreenshotJobBuilder.Create(inputUrl)
-
-        //      .SetBrowserSize(1366, 768)
-        //       // Set what should be captured
-        //      .SetCaptureZone(CaptureZone.FullPage) 
-        //       // Set when the picture is taken
-        //      .SetTrigger(new WindowLoadTrigger())
-        //       // Capture the screenshot 100 ms after DOMContentLoaded is fired
-        //      .SetTrigger(new DomReadyTrigger(100));
-
-        //    System.IO.File.WriteAllBytes("Website Screenshot", screenshotJob.Freeze());
-
-        //  return screenshotJob.Freeze("Details");
-        //}
-
+      
 
     }
 }

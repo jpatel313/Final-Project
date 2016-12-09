@@ -35,7 +35,7 @@ namespace FinalProjectAlpha.Controllers
                 }
             }
 
-            ViewBag.ss = SaveScreen("http://wayne.edu");
+            ViewBag.ss = SaveScreen(Link);
             return View();
         }
         [Authorize(Roles = "Admin")]
@@ -56,7 +56,7 @@ namespace FinalProjectAlpha.Controllers
             string ArchiveLink = archiveLink(Link);
 
             //Call screenshot method, input users website link.
-            byte[] SnapShot = SaveScreen(Link);
+            var SnapShot = SaveScreen(Link);
 
             //add Archive obj to db
             Archive archive = new Archive(newLink, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot);

@@ -14,7 +14,7 @@
     @*Convert byte[] to image*@
 
     @{
-        var base64 = Convert.ToBase64String(ViewBag.ss);
+        var base64 = Convert.ToBase64String(ViewBag.Archive.SnapShot);
         var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
     }
 

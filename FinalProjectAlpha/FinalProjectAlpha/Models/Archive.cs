@@ -14,29 +14,23 @@ namespace FinalProjectAlpha.Models
     
     public partial class Archive
     {
-        public Archive()
+        private string newLink;
+
+        public Archive(string newLink, string archiveLink, string repoLink, string shortDesc, string longDesc, byte[] snapShot)
         {
-        }
-        public Archive(string link, string archiveLink, string repoLink, string shortDesc, string longDesc)
-        {
-            Link = link;
+            this.newLink = newLink;
             ArchiveLink = archiveLink;
             RepoLink = repoLink;
             ShortDesc = shortDesc;
             LongDesc = longDesc;
+            SnapShot = snapShot;
         }
 
-        public Archive(string link, string archiveLink, string shortDesc)
-        {
-            Link = link;
-            ArchiveLink = archiveLink;
-            ShortDesc = shortDesc;
-        }
-
-        public string Link { get; set; } 
+        public string Link { get; set; }
         public string ArchiveLink { get; set; }
-        public string RepoLink { get; set; } //nullable
+        public string RepoLink { get; set; }
         public string ShortDesc { get; set; }
-        public string LongDesc { get; set; } //nullable
+        public string LongDesc { get; set; }
+        public byte[] SnapShot { get; set; }
     }
 }

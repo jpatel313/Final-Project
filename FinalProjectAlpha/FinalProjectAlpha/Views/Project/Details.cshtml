@@ -3,21 +3,89 @@
     ViewBag.Title = "Details";
 }
 <center>
-    <h2>Details</h2>
-    <h4>@ViewBag.Archive.Link</h4>
-    <h4>@ViewBag.Archive.ArchiveLink</h4>
-    <h4>@ViewBag.Archive.RepoLink</h4>
-    <h4>@ViewBag.Archive.ShortDesc</h4>
-    <h4>@ViewBag.Archive.LongDesc</h4>
-
-
+    <div class="col-md-8">
+        <iframe class="img-responsive" src="@ViewBag.Archive.ArchiveLink" width="750" height="500" alt="">
+            <p>Your browser does not support iframes.</p>
+        </iframe>
+    </div>
     @*Convert byte[] to image*@
 
-    @{
+
+
+</center>
+
+
+<div class="container">
+
+    <!-- Portfolio Item Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Portfolio Item
+                <small>Item Subheading</small>
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+            @{
         var base64 = Convert.ToBase64String(ViewBag.Archive.SnapShot);
         var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
     }
 
-    <img src="@imgSrc" height="400" width="400" />
+    <img src="@imgSrc" height="600" width="750" />
 
-</center>
+        <div class="col-md-4">
+            <h3>Project Description</h3>
+            <p>
+                @ViewBag.Archive.ShortDesc
+            </p>
+            <br />
+            <p>@ViewBag.Archive.LongDesc</p>
+            <h3>Project Details</h3>
+            <ul>
+                <li>Project Placeholder</li>
+                <li>GitHub Repo: @ViewBag.Archive.RepoLink</li>
+                <li>Original Link: @ViewBag.Archive.Link</li>
+                <li>Archive Link: @ViewBag.Archive.ArchiveLink</li>
+            </ul>
+        </div>
+
+    </div>
+    <!-- /.row -->
+    <!-- Related Projects Row -->
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h3 class="page-header">Related Projects</h3>
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+            <a href="#">
+                <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+            <a href="#">
+                <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+            <a href="#">
+                <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+            <a href="#">
+                <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+
+    </div>
+    <!-- /.row -->
+</div>

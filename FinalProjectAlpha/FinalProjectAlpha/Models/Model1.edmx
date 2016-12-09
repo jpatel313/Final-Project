@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="waybackdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="waybackdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Archives">
           <Key>
             <PropertyRef Name="Link" />
@@ -14,12 +14,12 @@
           <Property Name="RepoLink" Type="nvarchar" MaxLength="100" />
           <Property Name="ShortDesc" Type="nchar" MaxLength="200" Nullable="false" />
           <Property Name="LongDesc" Type="nvarchar" MaxLength="500" />
+          <Property Name="SnapShot" Type="varbinary(max)" />
         </EntityType>
         <EntityContainer Name="waybackdbModelStoreContainer">
           <EntitySet Name="Archives" EntityType="Self.Archives" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="waybackdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -32,6 +32,7 @@
           <Property Name="RepoLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ShortDesc" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="LongDesc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SnapShot" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityContainer Name="waybackdbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Archives" EntityType="Self.Archive" />
@@ -45,6 +46,7 @@
           <EntitySetMapping Name="Archives">
             <EntityTypeMapping TypeName="waybackdbModel.Archive">
               <MappingFragment StoreEntitySet="Archives">
+                <ScalarProperty Name="SnapShot" ColumnName="SnapShot" />
                 <ScalarProperty Name="Link" ColumnName="Link" />
                 <ScalarProperty Name="ArchiveLink" ColumnName="ArchiveLink" />
                 <ScalarProperty Name="RepoLink" ColumnName="RepoLink" />

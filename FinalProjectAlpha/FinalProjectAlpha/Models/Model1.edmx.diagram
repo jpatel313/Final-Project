@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="03fc921bdd6146a48f0507821c0b5cd2" Name="Diagram1">
         <EntityTypeShape EntityType="waybackdbModel.Archive" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="waybackdbModel.AspNetUser" Width="1.5" PointX="1.25" PointY="6" />
+        <AssociationConnector Association="waybackdbModel.FK_Archives_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -54,9 +54,7 @@ namespace FinalProjectAlpha
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

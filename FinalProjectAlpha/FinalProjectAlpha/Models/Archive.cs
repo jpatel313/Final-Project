@@ -13,30 +13,32 @@ namespace FinalProjectAlpha.Models
     using System.Collections.Generic;
     
     public partial class Archive
-    {
+    {   //Empty Archive constructor. 
+        public Archive()
+        {
+
+        }
+
+        //Full constructor of archive.
+        public Archive(string link, string archiveLink, string repoLink, string shortDesc, string longDesc, byte[] snapShot, string userID)
+        {
+            Link = link;
+            ArchiveLink = archiveLink;
+            RepoLink = repoLink;
+            ShortDesc = shortDesc;
+            LongDesc = longDesc;
+            SnapShot = snapShot;
+            UserID = userID;
+        }
+
         public string Link { get; set; }
         public string ArchiveLink { get; set; }
         public string RepoLink { get; set; }
         public string ShortDesc { get; set; }
         public string LongDesc { get; set; }
         public byte[] SnapShot { get; set; }
-
-        public Archive()
-            {
-            }
-        public Archive(string Link, string archiveLink, string repoLink, string shortDesc, string longDesc, byte[] snapShot)
-        {
-            this.Link = Link;
-            ArchiveLink = archiveLink;
-            RepoLink = repoLink;
-            ShortDesc = shortDesc;
-            LongDesc = longDesc;
-            SnapShot = snapShot;
-        }
-
+        public string UserID { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
     }
-
-
-
-
 }

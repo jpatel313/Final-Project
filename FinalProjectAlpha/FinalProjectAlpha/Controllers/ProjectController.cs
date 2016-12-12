@@ -19,6 +19,8 @@ namespace FinalProjectAlpha.Controllers
 {
     public class ProjectController : Controller
     {
+        public string Short { get; private set; }
+
         // GET: Project
         [Authorize(Roles = "Admin, Alumni")]
         public ActionResult Details(string Link)
@@ -50,7 +52,12 @@ namespace FinalProjectAlpha.Controllers
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
             string newLink = "http://" + Link;
-            saveLink(newLink);
+
+
+            if ((saveLink(newLink))== false) //If we get an error (false)
+            {
+                return View("New");
+            }
 
             //get Link from Jay's ArchiveLink()
             string ArchiveLink = archiveLink(Link);
@@ -61,23 +68,45 @@ namespace FinalProjectAlpha.Controllers
             //add Archive obj to db
             Archive archive = new Archive(newLink, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot);
 
-            
+
             dbContext.Archives.Add(archive);
 
 
             //save to db
-           dbContext.SaveChanges();
+            dbContext.SaveChanges();
             //send user to Project/Details 
-
-
 
             return RedirectToAction("Details", "Project", new { Link = archive.Link });
 
         }
 
-        public void saveLink(string inputUrl)
+        public bool saveLink(string Link) //this is the "newLink" //Returns false if there is any error
         {
-            // Create a request for the URL. 
+            //get db
+            waybackdbEntities dbContext = new waybackdbEntities();
+
+            List<Archive> archiveList = dbContext.Archives.ToList();
+
+            List<String> Links = new List<string>();
+            foreach (var item in archiveList)
+            {
+                Links.Add(item.Link);
+            }
+
+            if (Links.Exists(x => x == Link))
+            {
+                ViewBag.errormessage = "Link exists!";
+                return false;
+            }
+            else
+            { 
+                return saveLinkInDB(Link);
+            }
+        }
+
+        public bool saveLinkInDB(string inputUrl)
+        {
+            // Create a request for the API. 
             string url = "http://archive.org/wayback/available?url=" + inputUrl;
 
             HttpWebRequest request =
@@ -88,24 +117,59 @@ namespace FinalProjectAlpha.Controllers
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             //create object 
             StreamReader rd = new StreamReader(response.GetResponseStream());
+
             string wbackResponse = rd.ReadToEnd();
-            JObject urlRes = JObject.Parse(wbackResponse);
-            string check = (string)urlRes["archived_snapshots"]["closest"]["available"]; //Not sure, but if we get an error, this may throw an exception
-            if (check == "false") //live but not archived
+
+            if (checkBefore(wbackResponse))
             {
                 HttpWebRequest req = WebRequest.CreateHttp("http://archive.org/save/_embed/" + inputUrl);
                 req.UserAgent =
                 @"User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
             }
-            else if (check == "true")
+            else
+            {
+                return false;
+            }
+
+            return checkAfter(wbackResponse); //false is unsucessful save
+
+
+        }
+        private bool checkAfter(string wbackResponse) //false is unsucessful save and a error message
+        {
+            JObject urlRes = JObject.Parse(wbackResponse);
+            if (urlRes["archived_snapshots"]["closest"] == null)
+            {
+                ViewBag.errormessage = "Something went wrong, the url could not be saved.";
+
+                return false;
+
+
+            }
+            else if ((bool)urlRes["archived_snapshots"]["closest"]["available"] == true)
             {
 
-                ViewBag.errormessage = "Sorry, this is archived already.";
+                //archive sucessfully saved
+                return true;
+
             }
-            else //All of the errors
+            ViewBag.errormessage = "Something went wrong, closest not null but available not true.";
+            return false;//we had an error
+        }
+        private bool checkBefore(string wbackResponse) //true = continue with saving, false = already saved or error
+        {
+            JObject urlRes = JObject.Parse(wbackResponse);
+            if (urlRes["archived_snapshots"]["closest"] == null)
             {
-                ViewBag.errorMessage = "Sorry, there is something wrong with the link or server";
+                return true;
+
             }
+            return true;
+
+            //currently it doesnt matter what is in the Wayback Archive, we will save a new archive anyway.
+
+            //later we can add the API to prevent saving a new archive if its already in the db.
+            
         }
 
         public string archiveLink(string inputUrl)
@@ -134,7 +198,7 @@ namespace FinalProjectAlpha.Controllers
 
         public byte[] SaveScreen(string inputUrl)
         {
-           // var url = "https://wayne.edu";
+            // var url = "https://wayne.edu";
 
             FileContentResult result = null;
             Bitmap bitmap = null;
@@ -184,7 +248,7 @@ namespace FinalProjectAlpha.Controllers
             return bitmap;
         }
 
-      
+
 
     }
 }

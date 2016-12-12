@@ -26,5 +26,6 @@ namespace FinalProjectAlpha.Models
         }
     
         public virtual DbSet<Archive> Archives { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }

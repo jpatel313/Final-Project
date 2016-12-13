@@ -7,6 +7,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FinalProjectAlpha.Models;
+using System.Collections.Generic; /// <summary>
+/// ADDED COLLECTIONS/Generic for the edit and delete actions
+/// </summary>
 
 namespace FinalProjectAlpha.Controllers
 {
@@ -16,6 +19,46 @@ namespace FinalProjectAlpha.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+
+        //Need some security here, or else post the URL (if that is even secure)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit(string Link)
+        {
+            waybackdbEntities dbContext = new waybackdbEntities();
+
+            //create list  
+            List<Archive> archiveList = dbContext.Archives.ToList();
+
+            //populate list with select object (by the input Link)  (refactor: use orm .find?)
+            foreach (var item in archiveList)
+            {
+                if (item.Link == Link)
+                {
+                    ViewBag.Archive = item;
+                }
+            }
+            return View();
+        }
+
+
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult Delete(string Link)
+        //{
+        //    waybackdbEntities dbContext = new waybackdbEntities();
+
+        //    //create list  
+        //    List<Archive> archiveList = dbContext.Archives.ToList();
+
+        //    //populate list with select object (by the input Link)  (refactor: use orm .find?)
+        //    foreach (var item in archiveList)
+        //    {
+        //        if (item.Link == Link)
+        //        {
+        //            archiveList.Remove(item);
+        //        }
+        //    }
+        //    return RedirectToAction("Index","Home");
+        //}
         public ManageController()
         {
         }

@@ -23,7 +23,7 @@ JQuery (function ($) {
             },
             LongDesc: {
                 required: false,
-                rangelength: [100, 500]
+                rangelength: [50, 500]
             }
         },
         messages:
@@ -40,7 +40,7 @@ JQuery (function ($) {
                     rangelength: "Your short description should be between 10 and 200 characters."
                 },
                 LongDesc: {
-                    rangelength: "Your long description should be between 100 and 500 characters."
+                    rangelength: "Your long description should be between 50 and 500 characters."
                 }
             },
         highlight: function (element) {

@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="03fc921bdd6146a48f0507821c0b5cd2" Name="Diagram1">
-        <EntityTypeShape EntityType="waybackdbModel.Archive" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="waybackdbModel.AspNetUser" Width="1.5" PointX="4.125" PointY="0.625" />
-        <AssociationConnector Association="waybackdbModel.FK_Archives_AspNetUsers" />
+        <EntityTypeShape EntityType="waybackdbModel.Archive" Width="1.5" PointX="6.375" PointY="0.875" />
+        <AssociationConnector Association="waybackdbModel.FK_Archives_AspNetUsers1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

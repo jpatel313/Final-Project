@@ -15,6 +15,7 @@ using System.Drawing.Imaging;
 
 using System.Windows.Forms;
 using Microsoft.AspNet.Identity;
+using System.Diagnostics;
 
 namespace FinalProjectAlpha.Controllers
 {
@@ -26,10 +27,13 @@ namespace FinalProjectAlpha.Controllers
         [Authorize(Roles = "Admin, Alumni")]
         public ActionResult Details(string Link)
         {
+            //get db
             waybackdbEntities dbContext = new waybackdbEntities();
 
+            //create list  
             List<Archive> archiveList = dbContext.Archives.ToList();
 
+            //populate list with select object (by the input Link)  (refactor: use orm .find?)
             foreach (var item in archiveList)
             {
                 if (item.Link == Link)
@@ -38,6 +42,7 @@ namespace FinalProjectAlpha.Controllers
                 }
             }
 
+            //put the associated screenshot on the Details page
             ViewBag.ss = SaveScreen(Link);
             return View();
         }
@@ -52,10 +57,10 @@ namespace FinalProjectAlpha.Controllers
         {
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
-            string newLink = "http://" + Link;
+            //string newLink = "http://" + Link;
 
 
-            if ((saveLink(newLink))== false) //If we get an error (false)
+            if ((saveLink(Link)) == false) //If we get an error (false)
             {
                 return View("New");
             }
@@ -68,17 +73,35 @@ namespace FinalProjectAlpha.Controllers
 
             string UserID = User.Identity.GetUserId();
 
-            //add Archive obj to db
-            Archive archive = new Archive(newLink, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot, UserID);
+            //create Archive obj 
+            Archive archive = new Archive(Link, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot, UserID);
 
-
+            //Add to db, save
             dbContext.Archives.Add(archive);
+            //try
+            //{
+            //    //return base.SaveChanges();
+            //    dbContext.SaveChanges();
+            //}
+            //catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            //{
+            //    foreach (var validationErrors in dbEx.EntityValidationErrors)
+            //    {
+            //        foreach (var validationError in validationErrors.ValidationErrors)
+            //        {
+            //            Trace.TraceInformation("Class: {0}, Property: {1}, Error: {2}",
+            //                validationErrors.Entry.Entity.GetType().FullName,
+            //                validationError.PropertyName,
+            //                validationError.ErrorMessage);
+            //        }
+            //    }
 
+            //    throw;  // You can also choose to handle the exception here...
+            //}
 
-            //save to db
             dbContext.SaveChanges();
+            
             //send user to Project/Details 
-
             return RedirectToAction("Details", "Project", new { Link = archive.Link });
 
         }
@@ -86,23 +109,28 @@ namespace FinalProjectAlpha.Controllers
         public bool saveLink(string Link) //this is the "newLink" //Returns false if there is any error
         {
             //get db
-            waybackdbEntities dbContext = new waybackdbEntities();
-
-            List<Archive> archiveList = dbContext.Archives.ToList();
-
-            List<String> Links = new List<string>();
-            foreach (var item in archiveList)
+            try
             {
-                Links.Add(item.Link);
-            }
+                waybackdbEntities dbContext = new waybackdbEntities();
+                List<Archive> archiveList = dbContext.Archives.ToList();
 
-            if (Links.Exists(x => x == Link))
+                List<String> Links = new List<string>();
+                foreach (var item in archiveList)
+                {
+                    Links.Add(item.Link);
+                }
+
+                if (Links.Exists(x => x == Link))
+                {
+                    ViewBag.errormessage = "Link exists!";
+                    return false;
+                }
+                else
+                {
+                    return saveLinkInDB(Link);
+                }
+            } catch
             {
-                ViewBag.errormessage = "Link exists!";
-                return false;
-            }
-            else
-            { 
                 return saveLinkInDB(Link);
             }
         }

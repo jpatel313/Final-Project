@@ -32,9 +32,9 @@ public partial class waybackdbEntities : DbContext
     }
 
 
-    public virtual DbSet<Archive> Archives { get; set; }
-
     public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+
+    public virtual DbSet<Archive> Archives { get; set; }
 
 }
 

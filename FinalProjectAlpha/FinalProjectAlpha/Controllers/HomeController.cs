@@ -33,18 +33,10 @@ namespace FinalProjectAlpha.Controllers
 
         public ActionResult Index()
         {
-
-
             waybackdbEntities dbContext = new waybackdbEntities();
-
-
-
-
             List<Archive> archiveList = dbContext.Archives.ToList();
 
-
             ViewBag.ArList = archiveList;
-
 
             return View();
         }

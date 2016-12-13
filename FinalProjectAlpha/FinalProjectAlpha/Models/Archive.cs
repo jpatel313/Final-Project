@@ -17,22 +17,20 @@ using System;
     
 public partial class Archive
 {
-        private string newLink;
-
         public Archive()
+            {}
+        public Archive(string link, string archiveLink, string repoLink, string shortDesc, string longDesc, byte[] snapShot, string userID)
         {
-
-        }
-
-        public Archive(string newLink, string archiveLink, string repoLink, string shortDesc, string longDesc, byte[] snapShot, string userID)
-        {
-            this.newLink = newLink;
+            Link = link;
             ArchiveLink = archiveLink;
             RepoLink = repoLink;
             ShortDesc = shortDesc;
             LongDesc = longDesc;
             SnapShot = snapShot;
             UserID = userID;
+            ProjectName = "projectName";
+            ArchiveDate = DateTime.Today;
+            
         }
 
         public string Link { get; set; }
@@ -48,6 +46,8 @@ public partial class Archive
     public byte[] SnapShot { get; set; }
 
     public string UserID { get; set; }
+
+
 
     public string ProjectName { get; set; }
 

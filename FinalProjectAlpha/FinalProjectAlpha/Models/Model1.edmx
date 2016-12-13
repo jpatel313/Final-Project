@@ -61,26 +61,10 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="waybackdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Archive">
-          <Key>
-            <PropertyRef Name="Link" />
-          </Key>
-          <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ArchiveLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RepoLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ShortDesc" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="LongDesc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="true" />
-          <Property Name="SnapShot" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="waybackdbModel.FK_Archives_AspNetUsers" FromRole="Archive" ToRole="AspNetUser" />
-          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ArchiveDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityContainer Name="waybackdbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Archives" EntityType="Self.Archive" />
           <EntitySet Name="AspNetUsers" EntityType="waybackdbModel.AspNetUser" />
-          <AssociationSet Name="FK_Archives_AspNetUsers" Association="waybackdbModel.FK_Archives_AspNetUsers">
+          <EntitySet Name="Archives" EntityType="waybackdbModel.Archive" />
+          <AssociationSet Name="FK_Archives_AspNetUsers1" Association="waybackdbModel.FK_Archives_AspNetUsers1">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Archive" EntitySet="Archives" />
           </AssociationSet>
@@ -101,9 +85,25 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Archives" Relationship="waybackdbModel.FK_Archives_AspNetUsers" FromRole="AspNetUser" ToRole="Archive" />
+          <NavigationProperty Name="Archives" Relationship="waybackdbModel.FK_Archives_AspNetUsers1" FromRole="AspNetUser" ToRole="Archive" />
         </EntityType>
-        <Association Name="FK_Archives_AspNetUsers">
+        <EntityType Name="Archive">
+          <Key>
+            <PropertyRef Name="Link" />
+          </Key>
+          <Property Name="Link" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ArchiveLink" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RepoLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ShortDesc" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="LongDesc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SnapShot" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ArchiveDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="waybackdbModel.FK_Archives_AspNetUsers1" FromRole="Archive" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="FK_Archives_AspNetUsers1">
           <End Type="waybackdbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
           <End Type="waybackdbModel.Archive" Role="Archive" Multiplicity="*" />
           <ReferentialConstraint>
@@ -121,22 +121,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="waybackdbModelStoreContainer" CdmEntityContainer="waybackdbEntities">
-          <EntitySetMapping Name="Archives">
-            <EntityTypeMapping TypeName="waybackdbModel.Archive">
-              <MappingFragment StoreEntitySet="Archives">
-                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
-                <ScalarProperty Name="ArchiveDate" ColumnName="ArchiveDate" />
-                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="SnapShot" ColumnName="SnapShot" />
-                <ScalarProperty Name="Link" ColumnName="Link" />
-                <ScalarProperty Name="ArchiveLink" ColumnName="ArchiveLink" />
-                <ScalarProperty Name="RepoLink" ColumnName="RepoLink" />
-                <ScalarProperty Name="ShortDesc" ColumnName="ShortDesc" />
-                <ScalarProperty Name="LongDesc" ColumnName="LongDesc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="waybackdbModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
@@ -152,6 +136,22 @@
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Archives">
+            <EntityTypeMapping TypeName="waybackdbModel.Archive">
+              <MappingFragment StoreEntitySet="Archives">
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="ArchiveDate" ColumnName="ArchiveDate" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SnapShot" ColumnName="SnapShot" />
+                <ScalarProperty Name="LongDesc" ColumnName="LongDesc" />
+                <ScalarProperty Name="ShortDesc" ColumnName="ShortDesc" />
+                <ScalarProperty Name="RepoLink" ColumnName="RepoLink" />
+                <ScalarProperty Name="ArchiveLink" ColumnName="ArchiveLink" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

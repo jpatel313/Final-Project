@@ -3,7 +3,11 @@
 @{
     ViewBag.Title = "Savepage";
 }
-
+@if(string.IsNullOrEmpty(ViewBag.errormessage))
+{
+<div class="alert alert-danger" role="alert">@ViewBag.errormessage
+</div>
+}
 
 
 @*note:  link jquery css to here(?) so error messages will display before form submission*@
@@ -15,7 +19,20 @@
     <div class="container">
         <div class="form-horizontal">
             <form id="save-proj" action="Save" method="post">
-                <p>
+               
+                 <label for="basic-url">Your Project Name:</label> <br />
+                <div class="input-group">
+                    <input type="text" class="form-control" id="pname" aria-describedby="basic-addon3" name="ProjectName" />
+                </div>
+                <br />
+                
+                <label for="basic-url">Your Team Name:</label> <br />
+                <div class="input-group">
+                    <input type="text" class="form-control" id="team" aria-describedby="basic-addon3" name="TeamName" />
+                </div>
+                <br />
+                
+                 <p>
                     <label for="basic-url">Your full project URL:</label> <br />
                     <div class="input-group">
                         <input type="text" class="form-control" id="link" aria-describedby="basic-addon3" name="Link" />

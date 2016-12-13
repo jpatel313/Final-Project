@@ -46,14 +46,14 @@ namespace FinalProjectAlpha.Controllers
             ViewBag.ss = SaveScreen(Link);
             return View();
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Alumni")]
         public ActionResult New()
         {
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
-        public ActionResult Save(string Link, string RepoLink, string ShortDesc, string LongDesc)
+        [Authorize(Roles = "Admin, Alumni")]
+        public ActionResult Save(string Link, string RepoLink, string ShortDesc, string LongDesc, string TeamName, string ProjectName)
         {
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
@@ -74,7 +74,7 @@ namespace FinalProjectAlpha.Controllers
             string UserID = User.Identity.GetUserId();
 
             //create Archive obj 
-            Archive archive = new Archive(Link, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot, UserID);
+            Archive archive = new Archive(Link, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot, UserID, TeamName, ProjectName);
 
             //Add to db, save
             dbContext.Archives.Add(archive);

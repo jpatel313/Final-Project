@@ -19,7 +19,7 @@ public partial class Archive
 {
         public Archive()
             {}
-        public Archive(string link, string archiveLink, string repoLink, string shortDesc, string longDesc, byte[] snapShot, string userID)
+        public Archive(string link, string archiveLink, string repoLink, string shortDesc, string longDesc, byte[] snapShot, string userID, string teamName, string projectName)
         {
             Link = link;
             ArchiveLink = archiveLink;
@@ -28,7 +28,8 @@ public partial class Archive
             LongDesc = longDesc;
             SnapShot = snapShot;
             UserID = userID;
-            ProjectName = "projectName";
+            ProjectName = projectName;
+            TeamName = teamName;
             ArchiveDate = DateTime.Today;
             
         }

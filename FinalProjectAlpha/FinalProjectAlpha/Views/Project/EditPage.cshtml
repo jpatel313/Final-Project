@@ -9,11 +9,11 @@
 {
     <div class="alert alert-danger" role="alert">
         @ViewBag.errormessage
-</div>
+    </div>
 }
 
 
-@*note:  link jquery css to here(?) so error messages will display before form submission*@
+    @*note:  link jquery css to here(?) so error messages will display before form submission*@
     @*<link href="~/Content/formcss/style.css" rel="stylesheet" />*@
 
     <h4>Edit your Archive</h4>
@@ -23,46 +23,33 @@
             <div class="form-horizontal">
                 <form id="save-proj" action="Save" method="post">
 
-                    <label for="basic-url">Your Project Name:</label> <br />
+                    <label for="basic-url">Your Project Name:</label>
+                    <br />
                     <div class="input-group">
                         <input type="text" class="form-control" id="pname" placeholder=@ViewBag.Archive.ProjectName aria-describedby="basic-addon3" name="ProjectName" />
                     </div>
                     <br />
 
-                    <label for="basic-url">Your Team Name:</label> <br />
+                    <label for="basic-url">Your Team Name:</label>
+                    <br />
                     <div class="input-group">
                         <input type="text" class="form-control" id="team" placeholder=@ViewBag.Archive.TeamName aria-describedby="basic-addon3" name="TeamName" />
                     </div>
                     <br />
 
-                    <p>
-                        <label for="basic-url">Your full project URL:</label> <br />
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="link" placeholder=@ViewBag.Archive.Link aria-describedby="basic-addon3" name="Link" />
-                        </div>  @*note: change type back to url*@
-                        <br />
-                    </p>
-                    <p>
-                        <label for="basic-url">Your full repository URL:</label> <br />
-                        <div class="input-group">
-                            <input type="url" class="form-control" id="repolink" placeholder=@ViewBag.Archive.RepoLink aria-describedby="basic-addon3" name="RepoLink" />
-                        </div>
-                        <br />
-                    </p>
-                    <p>
-                        <label for="basic-url">A short description of your project:</label> <br />
+                        <label for="basic-url">A short description of your project:</label>
+                    <br />
                         <div class="input-group">
                             <input type="text" class="form-control" id="shortdesc" placeholder=@ViewBag.Archive.ShortDesc aria-describedby="basic-addon3" name="ShortDesc" />
                         </div>
-                        <br />
-                    </p>
-                    <p>
-                        <label for="basic-url">A more detailed description of your project:</label> <br />
+                    <br />
+
+                    <label for="basic-url">A more detailed description of your project:</label>
+                    <br />
                         <div class="input-group">
                             <textarea class="form-control" id="longdesc" placeholder=@ViewBag.Archive.LongDesc name="LongDesc" rows="3" column="200"></textarea>
                         </div>
-                        <br />
-                    </p>
+                    <br />
 
                     <input type="submit" id="save" class="btn btn-info " value="Submit">
 

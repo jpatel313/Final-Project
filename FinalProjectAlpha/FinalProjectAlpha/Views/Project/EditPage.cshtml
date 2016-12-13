@@ -1,16 +1,10 @@
 ﻿@model FinalProjectAlpha.Models.Archive
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "EditPage";
 }
 
 
-@if (string.IsNullOrEmpty(ViewBag.errormessage))
-{
-    <div class="alert alert-danger" role="alert">
-        @ViewBag.errormessage
-    </div>
-}
 
 
     @*note:  link jquery css to here(?) so error messages will display before form submission*@
@@ -21,46 +15,50 @@
     <div class="col-sm-12">
         <div class="container">
             <div class="form-horizontal">
-                <form id="save-proj" action="Save" method="post">
+                <form id="Edit" action="Edit" method="post">
 
                     <label for="basic-url">Your Project Name:</label>
                     <br />
+                    @Html.HiddenFor(model => model.Link)
                     <div class="input-group">
-                        <input type="text" class="form-control" id="pname" placeholder=@ViewBag.Archive.ProjectName aria-describedby="basic-addon3" name="ProjectName" />
+                        
+                        @Html.EditorFor(model=> model.ProjectName)
                     </div>
                     <br />
 
                     <label for="basic-url">Your Team Name:</label>
                     <br />
                     <div class="input-group">
-                        <input type="text" class="form-control" id="team" placeholder=@ViewBag.Archive.TeamName aria-describedby="basic-addon3" name="TeamName" />
+                        @*<input type="text" class="form-control" id="team" placeholder=@Model.TeamName aria-describedby="basic-addon3" name="TeamName" />*@
+                        @Html.EditorFor(model => model.TeamName)
                     </div>
                     <br />
 
                         <label for="basic-url">A short description of your project:</label>
                     <br />
                         <div class="input-group">
-                            <input type="text" class="form-control" id="shortdesc" placeholder=@ViewBag.Archive.ShortDesc aria-describedby="basic-addon3" name="ShortDesc" />
+                            @Html.EditorFor(model => model.ShortDesc)
                         </div>
                     <br />
 
                     <label for="basic-url">A more detailed description of your project:</label>
                     <br />
                         <div class="input-group">
-                            <textarea class="form-control" id="longdesc" placeholder=@ViewBag.Archive.LongDesc name="LongDesc" rows="3" column="200"></textarea>
+                            @Html.EditorFor(model => model.LongDesc)
+                            @*<textarea class="form-control" id="longdesc" placeholder=@Model.LongDesc name="LongDesc" rows="3" column="200"></textarea>*@
                         </div>
                     <br />
 
-                    <input type="submit" id="save" class="btn btn-info " value="Submit">
+                    <input type="submit" id="Edit" class="btn btn-info " value="Submit">
 
                 </form>
             </div>
-            <a href="@ViewBag.Archive.ArchiveLink" class="btn btn-primary btn-sm" role="button">Archive</a>
-            <a href="/Project/Details?Link=@ViewBag.Archive.Link" class="btn btn-info btn-sm" role="button">Details</a>
-            <a href="@ViewBag.Archive.Link" class="btn btn-default btn-sm" role="button">Live</a>
-            <a href="/Project/DeleteIT?Link=@ViewBag.Archive.Link" class="btn btn-danger btn-sm" role="button">Delete</a>
-            <a href="/Project/ArchiveIt?Link=@ViewBag.Archive.Link" class="btn btn-danger btn-sm" role="button">ReArchive</a>
-            <a href="/Project/ScreenShotIt?Link=@ViewBag.Archive.Link" class="btn btn-danger btn-sm" role="button">ReScreenshot</a>
+            @*<a href="@Model.ArchiveLink" class="btn btn-primary btn-sm" role="button">Archive</a>
+            <a href="/Project/Details?Link=@Model.Link" class="btn btn-info btn-sm" role="button">Details</a>
+            <a href="@Model.Link" class="btn btn-default btn-sm" role="button">Live</a>
+            <a href="/Project/DeleteIT?Link=@Model.Link" class="btn btn-danger btn-sm" role="button">Delete</a>
+            <a href="/Project/ArchiveIt?Link=@Model.Link" class="btn btn-danger btn-sm" role="button">ReArchive</a>
+            <a href="/Project/ScreenShotIt?Link=@Model.Link" class="btn btn-danger btn-sm" role="button">ReScreenshot</a>*@
         </div>
     </div>
 

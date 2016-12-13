@@ -23,8 +23,7 @@ namespace FinalProjectAlpha.Controllers
     {
         public string Short { get; private set; }
 
-        // GET: Project
-        [Authorize(Roles = "Admin, Alumni")]
+        #region Actions
         public ActionResult Details(string Link)
         {
             //get db
@@ -46,14 +45,12 @@ namespace FinalProjectAlpha.Controllers
             ViewBag.ss = SaveScreen(Link);
             return View();
         }
-        [Authorize(Roles = "Admin, Alumni")]
+        
         public ActionResult New()
         {
             return View();
         }
-
-        [Authorize(Roles = "Admin, Alumni")]
-        public ActionResult Save(string Link, string RepoLink, string ShortDesc, string LongDesc, string TeamName, string ProjectName)
+        public ActionResult Save(string ProjectName, string TeamName, string Link, string RepoLink, string ShortDesc, string LongDesc)
         {
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
@@ -105,8 +102,86 @@ namespace FinalProjectAlpha.Controllers
             return RedirectToAction("Details", "Project", new { Link = archive.Link });
 
         }
+        public ActionResult EditPage(string Link)
+        {
+            waybackdbEntities dbContext = new waybackdbEntities();
 
-        public bool saveLink(string Link) //this is the "newLink" //Returns false if there is any error
+            //create list  
+            Archive archiveList = dbContext.Archives.Find(Link);
+
+           
+
+            return View(archiveList);
+        }
+        [HttpPost]
+        public ActionResult Edit(Archive editedArchive)
+        {
+            waybackdbEntities dbContext = new waybackdbEntities();
+
+            //List<Archive> archiveList = dbContext.Archives.ToList();
+            //create list  
+            Archive oldArchive = dbContext.Archives.Find(editedArchive.Link);
+            
+
+            string UserID = User.Identity.GetUserId();
+
+            if(oldArchive.UserID == UserID)
+            {
+                // dbContext.Archives.Remove(oldArchive);
+                //dbContext.Archives.Add(editedArchive);
+
+                oldArchive.ProjectName = editedArchive.ProjectName;
+                oldArchive.TeamName = editedArchive.TeamName;
+                oldArchive.ShortDesc = editedArchive.ShortDesc;
+                oldArchive.LongDesc = editedArchive.LongDesc;
+            }
+
+            dbContext.SaveChanges();
+
+            //send user to Project/ Details
+            return RedirectToAction("Dashboard", "Home");
+
+        }
+        public ActionResult EditArchive(string Link)
+        {
+            waybackdbEntities dbContext = new waybackdbEntities();
+
+            //create list  
+            List<Archive> archiveList = dbContext.Archives.ToList();
+
+            //populate list with select object (by the input Link)  (refactor: use orm .find?)
+            foreach (var item in archiveList)
+            {
+                if (item.Link == Link)
+                {
+                    ViewBag.Archive = item;
+                }
+            }
+            return View();
+        }
+        
+        public ActionResult Delete(string Link)
+        {
+            waybackdbEntities dbContext = new waybackdbEntities();
+
+            //create list  
+            List<Archive> archiveList = dbContext.Archives.ToList();
+
+            //populate list with select object (by the input Link)  (refactor: use orm .find?)
+            foreach (var item in archiveList)
+            {
+                if (item.Link == Link)
+                {
+                    archiveList.Remove(item);
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+         
+        #endregion
+        //checks the DB for another project with the same name
+
+        public bool saveLink(string Link) //checks the DB for another project with the same name //Returns false if there is any error
         {
             //get db
             try
@@ -134,7 +209,6 @@ namespace FinalProjectAlpha.Controllers
                 return saveLinkInDB(Link);
             }
         }
-
         public bool saveLinkInDB(string inputUrl)
         {
             // Create a request for the API. 
@@ -165,6 +239,21 @@ namespace FinalProjectAlpha.Controllers
             return checkAfter(wbackResponse); //false is unsucessful save
 
 
+        } //checks the wayback machine for a archive already. //False = error
+        private bool checkBefore(string wbackResponse) //true = continue with saving, false = already saved or error
+        {
+            JObject urlRes = JObject.Parse(wbackResponse);
+            if (urlRes["archived_snapshots"]["closest"] == null)
+            {
+                return true;
+
+            }
+            return true;
+
+            //currently it doesnt matter what is in the Wayback Archive, we will save a new archive anyway.
+
+            //later we can add the API to prevent saving a new archive if its already in the db.
+            
         }
         private bool checkAfter(string wbackResponse) //false is unsucessful save and a error message
         {
@@ -187,21 +276,7 @@ namespace FinalProjectAlpha.Controllers
             ViewBag.errormessage = "Something went wrong, closest not null but available not true.";
             return false;//we had an error
         }
-        private bool checkBefore(string wbackResponse) //true = continue with saving, false = already saved or error
-        {
-            JObject urlRes = JObject.Parse(wbackResponse);
-            if (urlRes["archived_snapshots"]["closest"] == null)
-            {
-                return true;
 
-            }
-            return true;
-
-            //currently it doesnt matter what is in the Wayback Archive, we will save a new archive anyway.
-
-            //later we can add the API to prevent saving a new archive if its already in the db.
-            
-        }
 
         public string archiveLink(string inputUrl)
         {

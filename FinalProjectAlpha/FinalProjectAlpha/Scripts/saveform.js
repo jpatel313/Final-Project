@@ -1,3 +1,4 @@
+
 ﻿/// <reference path="jquery.validate.js" />
 /// <reference path="jquery-3.1.1.intellisense.js" />
 /// <reference path="respond.js" />
@@ -35,11 +36,13 @@ JQuery (function ($) {
                 RepoLink: {
                     url: "Please enter a valid, working URL."
                 },
+                //If user enters nothing in the required field, and included is the ranges for short and ong description
                 ShortDesc: {
                     required: "Short project description is required.",
                     rangelength: "Your short description should be between 10 and 200 characters."
                 },
                 LongDesc: {
+
                     rangelength: "Your long description should be between 50 and 500 characters."
                 }
             },
@@ -51,3 +54,20 @@ JQuery (function ($) {
         }
     });
 })
+
+             validator.resetForm();
+             validator.showErrors({
+        "firstname": "I know that your firstname is Pete, Pete!"
+    });
+
+        
+    //errorPlacement: function(error, element) {
+    //    error.insertAfter('.form-group'); //So i putted it after the .form-group so it will not include to your append/prepend group.
+    //}; 
+    //highlight: function(Link) {
+    //    $(element).closest('.form-group').addClass('has-error');
+    //};
+    //unhighlight: function(element) {
+    //    $(element).closest('.form-group').removeClass('has-error');
+    //}
+

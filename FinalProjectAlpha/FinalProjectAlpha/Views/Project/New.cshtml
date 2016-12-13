@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Savepage";
 }
-@if(string.IsNullOrEmpty(ViewBag.errormessage))
+@if(!string.IsNullOrEmpty(ViewBag.errormessage))
 {
 <div class="alert alert-danger" role="alert">@ViewBag.errormessage
 </div>

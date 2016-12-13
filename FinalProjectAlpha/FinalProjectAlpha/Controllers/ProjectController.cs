@@ -21,10 +21,9 @@ namespace FinalProjectAlpha.Controllers
 {
     public class ProjectController : Controller
     {
-        public string Short { get; private set; }
 
         #region Actions
-        public ActionResult Details(string Link)
+        public ActionResult Details(string Link)    // returns one archived website in iframe, with details
         {
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
@@ -32,42 +31,41 @@ namespace FinalProjectAlpha.Controllers
             //create list  
             List<Archive> archiveList = dbContext.Archives.ToList();
 
-            //populate list with select object (by the input Link)  (refactor: use orm .find?)
+            // checks each item in db for matching primary key (to display selected record)
             foreach (var item in archiveList)
             {
                 if (item.Link == Link)
-                {
+                {//sends archive to page
                     ViewBag.Archive = item;
                 }
             }
-
-            //put the associated screenshot on the Details page
-            ViewBag.ss = SaveScreen(Link);
             return View();
         }
         
+        //This is the page that contains the form for adding pages
         public ActionResult New()
         {
             return View();
         }
+       
+       //Save() saves one Archive object into the database
         public ActionResult Save(string ProjectName, string TeamName, string Link, string RepoLink, string ShortDesc, string LongDesc)
         {
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
-            //string newLink = "http://" + Link;
-
-
-            if ((saveLink(Link)) == false) //If we get an error (false)
+            //savelink() tries to save link and returns false if error... changes ViewBag.errorMessage, accordingly 
+            if ((saveLink(Link)) == false) //If we get an error (false)     refactor to try/catch
             {
                 return View("New");
             }
 
-            //get Link from Jay's ArchiveLink()
+            //get wayback link from the wayback API
             string ArchiveLink = archiveLink(Link);
 
             //Call screenshot method, input users website link.
             var SnapShot = SaveScreen(Link);
 
+            //gets currently logged in user
             string UserID = User.Identity.GetUserId();
 
             //create Archive obj 
@@ -75,91 +73,55 @@ namespace FinalProjectAlpha.Controllers
 
             //Add to db, save
             dbContext.Archives.Add(archive);
-            //try
-            //{
-            //    //return base.SaveChanges();
-            //    dbContext.SaveChanges();
-            //}
-            //catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-            //{
-            //    foreach (var validationErrors in dbEx.EntityValidationErrors)
-            //    {
-            //        foreach (var validationError in validationErrors.ValidationErrors)
-            //        {
-            //            Trace.TraceInformation("Class: {0}, Property: {1}, Error: {2}",
-            //                validationErrors.Entry.Entity.GetType().FullName,
-            //                validationError.PropertyName,
-            //                validationError.ErrorMessage);
-            //        }
-            //    }
-
-            //    throw;  // You can also choose to handle the exception here...
-            //}
-
             dbContext.SaveChanges();
             
-            //send user to Project/Details 
+            //send user to Project/Details?Link=myurl.com
             return RedirectToAction("Details", "Project", new { Link = archive.Link });
 
         }
         public ActionResult EditPage(string Link)
-        {
+        {   
+            //get db
             waybackdbEntities dbContext = new waybackdbEntities();
 
-            //create list  
-            Archive archiveList = dbContext.Archives.Find(Link);
+            //Finds one matching archive
+            Archive archive = dbContext.Archives.Find(Link);
 
            
-
-            return View(archiveList);
+            //sends the archive to the view
+            return View(archive);
         }
+        //attribute tells the routing engine(mvc) to send any POST requests to that action method to the one method over the other.Ask Kamel
+        //Method that changes an archive in db. only sends info we want to edit.
         [HttpPost]
         public ActionResult Edit(Archive editedArchive)
-        {
+        {   //
             waybackdbEntities dbContext = new waybackdbEntities();
-
-            //List<Archive> archiveList = dbContext.Archives.ToList();
-            //create list  
+            
+            //Get original archive.
             Archive oldArchive = dbContext.Archives.Find(editedArchive.Link);
             
-
+            //Get user that is logged in.
             string UserID = User.Identity.GetUserId();
 
+            //Check if original archive Foreign key(userid) matches logged in user.
             if(oldArchive.UserID == UserID)
             {
-                // dbContext.Archives.Remove(oldArchive);
-                //dbContext.Archives.Add(editedArchive);
+              //change the values in original archive to the edited values.
 
                 oldArchive.ProjectName = editedArchive.ProjectName;
                 oldArchive.TeamName = editedArchive.TeamName;
                 oldArchive.ShortDesc = editedArchive.ShortDesc;
                 oldArchive.LongDesc = editedArchive.LongDesc;
-            }
 
-            dbContext.SaveChanges();
+               dbContext.SaveChanges();
+                }
 
-            //send user to Project/ Details
+            //send user to /home/dashboard
             return RedirectToAction("Dashboard", "Home");
 
         }
-        public ActionResult EditArchive(string Link)
-        {
-            waybackdbEntities dbContext = new waybackdbEntities();
-
-            //create list  
-            List<Archive> archiveList = dbContext.Archives.ToList();
-
-            //populate list with select object (by the input Link)  (refactor: use orm .find?)
-            foreach (var item in archiveList)
-            {
-                if (item.Link == Link)
-                {
-                    ViewBag.Archive = item;
-                }
-            }
-            return View();
-        }
-        
+        //to be called when a delete button is made
         public ActionResult Delete(string Link)
         {
             waybackdbEntities dbContext = new waybackdbEntities();
@@ -177,24 +139,29 @@ namespace FinalProjectAlpha.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-         
+
         #endregion
         //checks the DB for another project with the same name
-
-        public bool saveLink(string Link) //checks the DB for another project with the same name //Returns false if there is any error
+        #region Methods
+        public bool saveLink(string Link)
+        //checks the DB for another project with the same name //Returns false if there is any error
         {
             //get db
             try
-            {
+            {//if db is empty, we catch and skip this error handling.
                 waybackdbEntities dbContext = new waybackdbEntities();
+
                 List<Archive> archiveList = dbContext.Archives.ToList();
 
-                List<String> Links = new List<string>();
+                List<string> Links = new List<string>();
+
+                //Use primary key to separate lists
                 foreach (var item in archiveList)
                 {
                     Links.Add(item.Link);
                 }
 
+                //If link already in db, message.
                 if (Links.Exists(x => x == Link))
                 {
                     ViewBag.errormessage = "Link exists!";
@@ -204,7 +171,9 @@ namespace FinalProjectAlpha.Controllers
                 {
                     return saveLinkInDB(Link);
                 }
-            } catch
+            }
+
+            catch
             {
                 return saveLinkInDB(Link);
             }
@@ -214,17 +183,21 @@ namespace FinalProjectAlpha.Controllers
             // Create a request for the API. 
             string url = "http://archive.org/wayback/available?url=" + inputUrl;
 
+        
             HttpWebRequest request =
             (HttpWebRequest)WebRequest.Create(url);
             request.UserAgent = @"User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
 
             // Get the response.
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            //create object 
+            
+            //create object from response.
             StreamReader rd = new StreamReader(response.GetResponseStream());
-
+            
+            //read the object.
             string wbackResponse = rd.ReadToEnd();
 
+            //If there is an error, 
             if (checkBefore(wbackResponse))
             {
                 HttpWebRequest req = WebRequest.CreateHttp("http://archive.org/save/_embed/" + inputUrl);
@@ -243,6 +216,7 @@ namespace FinalProjectAlpha.Controllers
         private bool checkBefore(string wbackResponse) //true = continue with saving, false = already saved or error
         {
             JObject urlRes = JObject.Parse(wbackResponse);
+            //Checks the wayback machine if there is already an archive
             if (urlRes["archived_snapshots"]["closest"] == null)
             {
                 return true;
@@ -255,13 +229,17 @@ namespace FinalProjectAlpha.Controllers
             //later we can add the API to prevent saving a new archive if its already in the db.
             
         }
+
+        //Checks if the url was bad, or some oddball error (False is a bad save and returns an error message)
         private bool checkAfter(string wbackResponse) //false is unsucessful save and a error message
         {
             JObject urlRes = JObject.Parse(wbackResponse);
             if (urlRes["archived_snapshots"]["closest"] == null)
             {
+                //Most likely the person entered a url of a offline website
                 ViewBag.errormessage = "Something went wrong, the url could not be saved.";
 
+               
                 return false;
 
 
@@ -302,9 +280,9 @@ namespace FinalProjectAlpha.Controllers
 
         }
 
+        //saves a screenshot to db.
         public byte[] SaveScreen(string inputUrl)
-        {
-            // var url = "https://wayne.edu";
+        { 
 
             FileContentResult result = null;
             Bitmap bitmap = null;
@@ -318,6 +296,7 @@ namespace FinalProjectAlpha.Controllers
             thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
             thread.Start();
             thread.Join();
+
 
             if (bitmap != null)
             {
@@ -353,7 +332,7 @@ namespace FinalProjectAlpha.Controllers
 
             return bitmap;
         }
-
+        #endregion
 
 
     }

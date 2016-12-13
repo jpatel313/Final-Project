@@ -29,12 +29,12 @@
     <!-- /.row -->
     <!-- Portfolio Item Row -->
     <div class="row">
-
+        @*converts byte[] (as in db) to .jpg*@
             @{
         var base64 = Convert.ToBase64String(ViewBag.Archive.SnapShot);
         var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
     }
-
+        @*display image*@
     <img src="@imgSrc" height="600" width="750" />
 
         <div class="col-md-4">
@@ -46,7 +46,7 @@
             <p>@ViewBag.Archive.LongDesc</p>
             <h3>Project Details</h3>
             <ul>
-                <li>Project Placeholder</li>
+                <li>Project Name: @ViewBag.Archive.ProjectName </li>
                 <li>GitHub Repo: @ViewBag.Archive.RepoLink</li>
                 <li>Original Link: @ViewBag.Archive.Link</li>
                 <li>Archive Link: @ViewBag.Archive.ArchiveLink</li>
@@ -56,7 +56,7 @@
     </div>
     <!-- /.row -->
     <!-- Related Projects Row -->
-    <div class="row">
+    @*<div class="row">
 
         <div class="col-lg-12">
             <h3 class="page-header">Related Projects</h3>
@@ -86,6 +86,6 @@
             </a>
         </div>
 
-    </div>
+    </div>*@
     <!-- /.row -->
 </div>

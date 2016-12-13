@@ -10,35 +10,18 @@ namespace FinalProjectAlpha.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult ViewArchive(string Link)
+        public ActionResult Index()     
         {
             waybackdbEntities dbContext = new waybackdbEntities();
 
             List<Archive> archiveList = dbContext.Archives.ToList();
 
-            foreach (var item in archiveList)
-            {
-                if (item.Link == Link)
-                {
-                    ViewBag.Archive = item;
-                }
-            }
+            ViewBag.ArList = archiveList;   // return project records to the Index
 
             return View();
         }
 
-        public ActionResult Index()
-        {
-            waybackdbEntities dbContext = new waybackdbEntities();
-
-            List<Archive> archiveList = dbContext.Archives.ToList();
-
-            ViewBag.ArList = archiveList;
-
-            return View();
-        }
-
-        public ActionResult About()
+        public ActionResult About()  
         {
             ViewBag.Message = "Your application description page.";
 
@@ -57,14 +40,13 @@ namespace FinalProjectAlpha.Controllers
             //Create DB Object. Get database
             waybackdbEntities Archives = new waybackdbEntities();
 
-            //Turn Object into a List. Get alll archives in it.
+            //Turn Object into a List. Get all archives in it.
             List<Archive> ArchiveList = Archives.Archives.ToList();
 
             //Get the current logged in user id.
-           //string CurrentUserId = User.Identity.Name;
-           string CurrentUserId = User.Identity.GetUserId();
+            string CurrentUserId = User.Identity.GetUserId();
 
-            //New list that represents the archives archived by user
+            //New list that represents the archives archived by user (foreign key)
             List<Archive> userArchiveList = new List<Archive>();
 
             //Get all userid that match current userid logged in.

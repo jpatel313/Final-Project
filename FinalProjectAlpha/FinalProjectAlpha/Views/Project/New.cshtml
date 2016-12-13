@@ -3,7 +3,9 @@
 @{
     ViewBag.Title = "Savepage";
 }
-@if(!string.IsNullOrEmpty(ViewBag.errormessage))
+
+@*displays alert in case of any errors (in SaveLink and Check- methods)*@
+@if(!(string.IsNullOrEmpty(ViewBag.errormessage)))
 {
 <div class="alert alert-danger" role="alert">@ViewBag.errormessage
 </div>

@@ -15,7 +15,10 @@
           <Property Name="ShortDesc" Type="nchar" MaxLength="200" Nullable="false" />
           <Property Name="LongDesc" Type="nvarchar" MaxLength="500" />
           <Property Name="SnapShot" Type="varbinary(max)" />
-          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ArchiveDate" Type="date" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
@@ -34,8 +37,8 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Archives_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+        <Association Name="FK_Archives_AspNetUsers1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Archives" Type="Self.Archives" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -49,7 +52,7 @@
         <EntityContainer Name="waybackdbModelStoreContainer">
           <EntitySet Name="Archives" EntityType="Self.Archives" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Archives_AspNetUsers" Association="Self.FK_Archives_AspNetUsers">
+          <AssociationSet Name="FK_Archives_AspNetUsers1" Association="Self.FK_Archives_AspNetUsers1">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Archives" EntitySet="Archives" />
           </AssociationSet>
@@ -66,10 +69,13 @@
           <Property Name="ArchiveLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RepoLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ShortDesc" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="LongDesc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LongDesc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Name="SnapShot" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="waybackdbModel.FK_Archives_AspNetUsers" FromRole="Archive" ToRole="AspNetUser" />
+          <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ArchiveDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="waybackdbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Archives" EntityType="Self.Archive" />
@@ -98,7 +104,7 @@
           <NavigationProperty Name="Archives" Relationship="waybackdbModel.FK_Archives_AspNetUsers" FromRole="AspNetUser" ToRole="Archive" />
         </EntityType>
         <Association Name="FK_Archives_AspNetUsers">
-          <End Type="waybackdbModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="waybackdbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
           <End Type="waybackdbModel.Archive" Role="Archive" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
@@ -118,6 +124,9 @@
           <EntitySetMapping Name="Archives">
             <EntityTypeMapping TypeName="waybackdbModel.Archive">
               <MappingFragment StoreEntitySet="Archives">
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="ArchiveDate" ColumnName="ArchiveDate" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="SnapShot" ColumnName="SnapShot" />
                 <ScalarProperty Name="Link" ColumnName="Link" />

@@ -14,6 +14,7 @@ using System.Threading;
 using System.Drawing.Imaging;
 
 using System.Windows.Forms;
+using Microsoft.AspNet.Identity;
 
 namespace FinalProjectAlpha.Controllers
 {
@@ -65,8 +66,10 @@ namespace FinalProjectAlpha.Controllers
             //Call screenshot method, input users website link.
             var SnapShot = SaveScreen(Link);
 
+            string UserID = User.Identity.GetUserId();
+
             //add Archive obj to db
-            Archive archive = new Archive(newLink, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot);
+            Archive archive = new Archive(newLink, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot, UserID);
 
 
             dbContext.Archives.Add(archive);

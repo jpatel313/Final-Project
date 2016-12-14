@@ -46,7 +46,7 @@ namespace FinalProjectAlpha.Controllers
             //Get the current logged in user id.
             string CurrentUserId = User.Identity.GetUserId();
 
-            //New list that represents the archives archived by user (foreign key)
+            //New list that will represent the archives archived by user (foreign key)
             List<Archive> userArchiveList = new List<Archive>();
 
             //Get all userid that match current userid logged in.

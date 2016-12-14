@@ -2,17 +2,6 @@
 @{
     ViewBag.Title = "Details";
 }
-<center>
-    <div class="col-md-8">
-        <iframe class="img-responsive" src="@ViewBag.Archive.ArchiveLink" width="750" height="500" alt="">
-            <p>Your browser does not support iframes.</p>
-        </iframe>
-    </div>
-    @*Convert byte[] to image*@
-
-
-
-</center>
 
 
 <div class="container">
@@ -30,13 +19,18 @@
     <!-- Portfolio Item Row -->
     <div class="row">
         @*converts byte[] (as in db) to .jpg*@
-            @{
+            @*@{
         var base64 = Convert.ToBase64String(ViewBag.Archive.SnapShot);
         var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
-    }
+    }*@
         @*display image*@
-    <img src="@imgSrc" height="600" width="750" />
+    @*<img src="@imgSrc" height="600" width="750" />*@
 
+        <div class="col-md-8">
+            <iframe class="img-responsive" src="@ViewBag.Archive.ArchiveLink" width="750" height="500" alt="">
+                <p>Your browser does not support iframes.</p>
+            </iframe>
+        </div>
         <div class="col-md-4">
             <h3>Project Description</h3>
             <p>
@@ -52,6 +46,9 @@
                 <li>Archive Link: @ViewBag.Archive.ArchiveLink</li>
             </ul>
         </div>
+
+            @*Convert byte[] to image*@
+
 
     </div>
     <!-- /.row -->

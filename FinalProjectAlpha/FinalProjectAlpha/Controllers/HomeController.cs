@@ -10,7 +10,7 @@ namespace FinalProjectAlpha.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()     
+        public ActionResult Index()
         {
             waybackdbEntities dbContext = new waybackdbEntities();
 
@@ -57,17 +57,9 @@ namespace FinalProjectAlpha.Controllers
                     userArchiveList.Add(item);
                 }
             }
-            //Make list that has all archives of currentuserid viewable.
-            // ViewBag.userArchiveList = userArchiveList.ToArray();
+            
+            //Make list that has all of the current users archive.
             ViewBag.userArchiveList = userArchiveList;
-
-            //foreach (var item in ViewBag.userArchiveList.ToArray())
-            //{
-            //    if (item.Link == ArchiveLink.)
-            //    {
-            //        userArchiveList.Add(item);
-            //    }
-            //}
 
             return View();
         }

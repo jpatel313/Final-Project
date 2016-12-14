@@ -1,36 +1,39 @@
 
-﻿/// <reference path="jquery.validate.js" />
-/// <reference path="jquery-3.1.1.intellisense.js" />
-/// <reference path="respond.js" />
+///<reference path="jquery.validate.js" />
+/// <reference path="jquery.validate.unobtrusive.min.js" />
+///<reference path="jquery-3.1.1.intellisense.js" />
+///<reference path="respond.js" />
 
 
-JQuery (function ($) {
-    var validator =  $('#save-proj').validate ({
-      
+$(function () {
+    validator = $('#save-proj').validate({
+
         rules: { //set rules for validation
             Link: {
-                required: true,
-                url: true,
-                regexp: /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i
+                required: true,         //causes the form field named "Link" to be required
+                url: true,         //requires valid URL input in the form field named "Link" (JQuery checks and flags on submit if it is not)
+                //regexp may be redundant.  is a pattern the input should conform to (permits http, https, etc.)
+                regexp: /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i
             },
             RepoLink: {
-                required: false,
-                url: true,
+                required: false,        //causes the form field named "RepoLink" to not be required
+                url: true,//requires URL input in the form field named "RepoLink" (JQuery checks and flags on submit if it is not)
+                //regexp may be redundant.  is a pattern the input should conform to (permits ftp and https, etc.)
                 regexp: /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i
             },
             ShortDesc: {
-                required: true,
-                rangelength: [10, 200]
+                required: true,              //causes the form field named "ShortDesc" to not be required
+                rangelength: [10, 200]      //rule controlling upper and lower limits of character number in "ShortDesc"
             },
             LongDesc: {
-                required: false,
-                rangelength: [50, 500]
+                required: false,             //causes the form field named "ShortDesc" to not be required
+                rangelength: [50, 500]      //rule controlling upper and lower limits of character number in "ShortDesc"
             }
         },
         messages:
-            { //error messages
+            {                    //error messages (to be displayed if the above rules are not met.  displayed when focus of field is lost (after some input only)
                 Link: {
-                    required: "Your Project URL is required.",
+                    required: "Your Project URL is required.",      //message displayed if "Link" input is left blank
                     url: "Please enter a valid, working URL."
                 },
                 RepoLink: {
@@ -38,36 +41,16 @@ JQuery (function ($) {
                 },
                 //If user enters nothing in the required field, and included is the ranges for short and ong description
                 ShortDesc: {
-                    required: "Short project description is required.",
-                    rangelength: "Your short description should be between 10 and 200 characters."
+                    required: "Short project description is required.",      //message displayed if "ShortDesc" input is left blank
+                    rangelength: "Your short description should be between 10 and 200 characters."  //message displayed if the character range requirements are not met
                 },
                 LongDesc: {
 
-                    rangelength: "Your long description should be between 50 and 500 characters."
+                    rangelength: "Your long description should be between 50 and 500 characters."   //message displayed if the character range requirements are not met
                 }
-            },
-        highlight: function (element) {
-            $(element).parent().addClass('error')
-        },
-        unhighlight: function (element) {
-            $(element).parent().removeClass('error')
-        }
-    });
-})
+            }
 
-             validator.resetForm();
-             validator.showErrors({
-        "firstname": "I know that your firstname is Pete, Pete!"
     });
 
-        
-    //errorPlacement: function(error, element) {
-    //    error.insertAfter('.form-group'); //So i putted it after the .form-group so it will not include to your append/prepend group.
-    //}; 
-    //highlight: function(Link) {
-    //    $(element).closest('.form-group').addClass('has-error');
-    //};
-    //unhighlight: function(element) {
-    //    $(element).closest('.form-group').removeClass('has-error');
-    //}
 
+});

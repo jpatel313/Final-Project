@@ -208,14 +208,31 @@ namespace FinalProjectAlpha.Controllers
             //If there is an error, 
             if (checkBefore(wbackResponse))
             {
-                HttpWebRequest req = WebRequest.CreateHttp("http://archive.org/save/_embed/" + inputUrl);
+                HttpWebRequest req = WebRequest.CreateHttp("http://web.archive.org/save/" + inputUrl);
                 req.UserAgent =
+                    
                 @"User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
+                req.GetResponse();
+                
             }
             else
             {
                 return false;
             }
+
+
+            request =
+            (HttpWebRequest)WebRequest.Create(url);
+            request.UserAgent = @"User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
+
+            // Get the response.
+            response = (HttpWebResponse)request.GetResponse();
+
+            //create object from response.
+            rd = new StreamReader(response.GetResponseStream());
+
+            //read the object.
+            wbackResponse = rd.ReadToEnd();
 
             return checkAfter(wbackResponse); //false is unsucessful save
 

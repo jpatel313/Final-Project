@@ -8,79 +8,30 @@
          <h3>Harness the power of archiving your website, project or personal website pinterest!</h3>
         </p>
     </center>
-    Take user to login page
-    <p><a href="/Account/login" class="btn btn-primary btn-lg">Log in now... &raquo;</a></p>
+    <center>
+        
+        <p><a href="/Account/login" class="btn btn-primary btn-lg">Log in now... &raquo;</a></p>
+    </center>
 </div>
 
 <!-- Page Content -->
 <div class="container">
 
-    @*<div class="row">
-
-        <div class="col-md-3">
-            <p class="lead">Shop Name</p>
-            <div class="list-group">
-                <a href="#" class="item1">.NET Developer Bootcamp</a>
-                <a href="#" class="item2">Java Developer Bootcamp</a>
-                <a href="#" class="item3">Frontend Developer Bootcamp</a>
-            </div>
-        </div>
-
-        <div class="col-md-9">
-            @*stretch goals: add function to add latest screenshots here*@
-
-    <div class="row carousel-holder">
-
-        <div class="col-md-12">
-            <div id="carousel-NET" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                </ol>
-
-                @*Wayback screenshotfor  slider display
-                @foreach (var item in ViewBag.ArList.archiveLink)
-                        {
-
-                            ViewBag.waybackLive = item;
-                                <div class="carousel-inner">
-                            <div class="item active">
-                                <img class="slide-image" =" http://patrickthompsondesign.com/img/projects/grand_circus/gr_02.jpg" alt="">
-                            </div>*@
-
-        }
-                            @*<div class="item">
-                                <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_03.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_06.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_05.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="slide-image" src="http://patrickthompsondesign.com/img/projects/grand_circus/gr_01.jpg" alt="">
-                            </div>*@
-
-
                 </div>
-                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                @*<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
                 <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
                     <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
+                </a>*@
             </div>
         </div>
 
     </div>
 
-    @*div class "444 archive" to hold view of user project data*@
-    @*Stretch goal: have a controller action to automatically add new projects*@
    
         <div class="panel panel-collapse">
-            <div class="panel-body">
+            <div class="slide">
                 @foreach (var item in ViewBag.ArList)
                 {
 

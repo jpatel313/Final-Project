@@ -16,9 +16,13 @@ using System.Drawing.Imaging;
 using System.Windows.Forms;
 using Microsoft.AspNet.Identity;
 using System.Diagnostics;
+using System.Security.Permissions;
+using GrabzIt;
+using GrabzIt.Parameters;
 
 namespace FinalProjectAlpha.Controllers
 {
+    [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     public class ProjectController : Controller
     {
 
@@ -63,7 +67,9 @@ namespace FinalProjectAlpha.Controllers
             string ArchiveLink = archiveLink(Link);
 
             //Call screenshot method, input users website link.
-            var SnapShot = SaveScreen(Link);
+            // var SnapShot = SaveScreen(Link);
+
+            var SnapShot = GetBytesFromImage(Link);
 
             //gets currently logged in user
             string UserID = User.Identity.GetUserId();
@@ -122,6 +128,8 @@ namespace FinalProjectAlpha.Controllers
 
         }
         //to be called when a delete button is made
+
+        [HttpPost]
         public ActionResult Delete(string Link)
         {
             waybackdbEntities dbContext = new waybackdbEntities();
@@ -310,14 +318,18 @@ namespace FinalProjectAlpha.Controllers
             return result.FileContents;
         }
 
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         private Bitmap ExportUrlToImage(string url, int width, int height)
         {
             // Load the webpage into a WebBrowser control
             WebBrowser wb = new WebBrowser();
+            
             wb.ScrollBarsEnabled = false;
             wb.ScriptErrorsSuppressed = true;
 
-            wb.Navigate(url);
+           // wb.Navigate(url);
+            wb.Navigate(url, null, null,
+                    "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36");
             while (wb.ReadyState != WebBrowserReadyState.Complete)
             {
                 Application.DoEvents();
@@ -328,9 +340,39 @@ namespace FinalProjectAlpha.Controllers
 
             Bitmap bitmap = new Bitmap(wb.Width, wb.Height);
             wb.DrawToBitmap(bitmap, new System.Drawing.Rectangle(0, 0, wb.Width, wb.Height));
+
+       
+           
             wb.Dispose();
 
             return bitmap;
+        }
+
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+        private byte[] GetBytesFromImage(string url)
+        {
+
+            GrabzItClient grabzIt = GrabzItClient.Create("OTc4YWU2YjFlMGQxNGI1YmEyNWJiYThjNTAyYWEzODc=", "P2w/Jz80FTMICj9DP2IQOyJ3dkdoPz8/Yj8/P1RQPz8=");
+
+
+            ImageOptions m = new ImageOptions();
+
+            m.CustomWaterMarkId = "";
+
+              m.Quality = 100;
+
+            m.BrowserHeight = 800;
+
+            m.BrowserWidth = 800;
+
+            grabzIt.URLToImage(url, m);
+
+            
+
+            byte[] bytes = grabzIt.SaveTo().Bytes;
+            return bytes; 
+
+
         }
         #endregion
 

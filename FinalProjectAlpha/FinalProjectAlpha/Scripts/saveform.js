@@ -51,6 +51,9 @@ $(function () {
             }
 
     });
-
-
+    //$("#save-proj").validate({
+    //error: function(label) {
+    //    $(this).addClass("error");
+    //},
 });
+

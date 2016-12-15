@@ -21,7 +21,7 @@ namespace FinalProjectAlpha.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("Server=tcp:tstweb18tomk.database.windows.net,1433;Initial Catalog=waybackdb;Persist Security Info=False;User ID=WaybackAdmin;Password=WayAdmin101!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;", throwIfV1Schema: false)
+            : base("Server=tcp:waybackserver.database.windows.net,1433;Initial Catalog=wayback;Persist Security Info=False;User ID=PKGC;Password=13pkfinal11.11;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;", throwIfV1Schema: true)
         {
         }
 

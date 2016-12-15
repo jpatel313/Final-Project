@@ -10,6 +10,7 @@
 
 </head>
 <body>
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -21,23 +22,25 @@
                 @Html.ActionLink("Keep Project Viewer", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-               
+
                 @Html.Partial("_LoginPartial")
-                
+
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        
+
     </div>
 
-   
+
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
-<footer>
-    <p>&copy; @DateTime.Now.Year - Project Keeper</p>
-</footer>
 </html>
+
+<footer>
+    <p> &copy; @DateTime.Now.Year - Project Keeper</p>
+</footer>
+

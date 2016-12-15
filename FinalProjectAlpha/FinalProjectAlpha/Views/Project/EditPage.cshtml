@@ -33,6 +33,12 @@
                     @Html.EditorFor(model => model.TeamName)
                 </div>
                 <br />
+                <div class="input-group">
+                    @*<input type="text" class="form-control" id="team" placeholder=@ViewBag.Archive.TeamName aria-describedby="basic-addon3" name="TeamName" />  <---- this code is kept so we can remember the classes we used to make stuff look more bootstrappy*@
+
+                    @Html.EditorFor(model => model.RepoLink)
+                </div>
+                <br />
                 <label for="basic-url">A short description of your project:</label>
                 <br />
                 <div class="input-group">

@@ -117,6 +117,7 @@ namespace FinalProjectAlpha.Controllers
 
                 oldArchive.ProjectName = editedArchive.ProjectName;
                 oldArchive.TeamName = editedArchive.TeamName;
+                oldArchive.RepoLink = editedArchive.RepoLink;
                 oldArchive.ShortDesc = editedArchive.ShortDesc;
                 oldArchive.LongDesc = editedArchive.LongDesc;
 

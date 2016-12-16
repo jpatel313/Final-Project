@@ -11,7 +11,7 @@
 </div>
 }
 
-*<link href="~/Content/formcss/style.css" rel="stylesheet" />
+<link href="~/Content/formcss/style.css" rel="stylesheet" />
 
 <h4>Archive your Project</h4>
 
@@ -74,6 +74,20 @@
 
 <script src="~/Scripts/saveform.js"></script>
 
+<script>
+    jQuery.validator.setDefaults({
+        debug: true,
+        success: "valid"
+    });
+    $("#save-proj").validate({
+        rules: {
+            field: {
+                required: true,
+                url: true
+            }
+        }
+    });
+</script>
 
 
 

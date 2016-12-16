@@ -197,6 +197,12 @@ namespace FinalProjectAlpha.Controllers
             (HttpWebRequest)WebRequest.Create(url);
             request.UserAgent = @"User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
 
+            //avoid 403 error for logged in users. auth check
+            //request.UseDefaultCredentials = true;
+            //request.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+            //request.AllowAutoRedirect = true;
+            
+            
             // Get the response.
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             
@@ -225,7 +231,7 @@ namespace FinalProjectAlpha.Controllers
             request =
             (HttpWebRequest)WebRequest.Create(url);
             request.UserAgent = @"User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
-
+            request.UseDefaultCredentials = true;
             // Get the response.
             response = (HttpWebResponse)request.GetResponse();
 
@@ -288,7 +294,8 @@ namespace FinalProjectAlpha.Controllers
             HttpWebRequest request = WebRequest.CreateHttp("http://archive.org/wayback/available?url=" + inputUrl);
             request.UserAgent =
     @"User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
-
+            //request.UseDefaultCredentials = true;
+            //request.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
             //Cast Wayback request to Response.  
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
@@ -367,25 +374,23 @@ namespace FinalProjectAlpha.Controllers
         }
 
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+        //This method takes the users project link and gets s
         private byte[] GetBytesFromImage(string url)
         {
 
             GrabzItClient grabzIt = GrabzItClient.Create("OTc4YWU2YjFlMGQxNGI1YmEyNWJiYThjNTAyYWEzODc=", "P2w/Jz80FTMICj9DP2IQOyJ3dkdoPz8/Yj8/P1RQPz8=");
 
-
             ImageOptions m = new ImageOptions();
 
             m.CustomWaterMarkId = "";
 
-              m.Quality = 100;
+            m.Quality = 100;
 
-            m.BrowserHeight = 800;
+            m.BrowserHeight = 1280;
 
-            m.BrowserWidth = 800;
+            m.BrowserWidth = 1024;
 
             grabzIt.URLToImage(url, m);
-
-            
 
             byte[] bytes = grabzIt.SaveTo().Bytes;
             return bytes; 

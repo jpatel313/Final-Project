@@ -4,60 +4,60 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="waybackdbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="waybackdbModelStoreContainer">
-    <EntitySet Name="AspNetUsers" EntityType="waybackdbModel.Store.AspNetUsers" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Archives" EntityType="waybackdbModel.Store.Archives" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_Archives_AspNetUsers1" Association="waybackdbModel.Store.FK_Archives_AspNetUsers1">
-      <End Role="AspNetUser" EntitySet="AspNetUsers" />
-      <End Role="Archive" EntitySet="Archives" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="AspNetUsers">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="256" />
-    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
-    <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="SecurityStamp" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
-    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
-    <Property Name="LockoutEndDateUtc" Type="datetime" Nullable="true" />
-    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
-    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
-  </EntityType>
-  <EntityType Name="Archives">
-    <Key>
-      <PropertyRef Name="Link" />
-    </Key>
-    <Property Name="Link" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="ArchiveLink" Type="nvarchar" Nullable="false" MaxLength="100" />
-    <Property Name="RepoLink" Type="nvarchar" Nullable="true" MaxLength="100" />
-    <Property Name="ShortDesc" Type="nchar" Nullable="false" MaxLength="200" />
-    <Property Name="LongDesc" Type="nvarchar" Nullable="true" MaxLength="500" />
-    <Property Name="SnapShot" Type="varbinary(max)" Nullable="true" />
-    <Property Name="UserID" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="ProjectName" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="ArchiveDate" Type="datetime" Nullable="false" />
-    <Property Name="TeamName" Type="nvarchar" Nullable="true" MaxLength="50" />
-  </EntityType>
-  <Association Name="FK_Archives_AspNetUsers1">
-    <End Role="AspNetUser" Type="waybackdbModel.Store.AspNetUsers" Multiplicity="1" />
-    <End Role="Archive" Type="waybackdbModel.Store.Archives" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUser">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Archive">
-        <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+    <Schema Namespace="waybackdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Archives">
+          <Key>
+            <PropertyRef Name="Link" />
+          </Key>
+          <Property Name="Link" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="ArchiveLink" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="RepoLink" Type="nvarchar" MaxLength="300" />
+          <Property Name="ShortDesc" Type="nchar" MaxLength="200" Nullable="false" />
+          <Property Name="LongDesc" Type="nvarchar" MaxLength="500" />
+          <Property Name="SnapShot" Type="varbinary(max)" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ArchiveDate" Type="datetime" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Archives_AspNetUsers1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Archives" Type="Self.Archives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Archives">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="waybackdbModelStoreContainer">
+          <EntitySet Name="Archives" EntityType="Self.Archives" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Archives_AspNetUsers1" Association="Self.FK_Archives_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Archives" EntitySet="Archives" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="waybackdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -91,15 +91,15 @@
           <Key>
             <PropertyRef Name="Link" />
           </Key>
-          <Property Name="Link" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ArchiveLink" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="RepoLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ArchiveLink" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="RepoLink" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="ShortDesc" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
           <Property Name="LongDesc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="SnapShot" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ArchiveDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ArchiveDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="waybackdbModel.FK_Archives_AspNetUsers1" FromRole="Archive" ToRole="AspNetUser" />
         </EntityType>

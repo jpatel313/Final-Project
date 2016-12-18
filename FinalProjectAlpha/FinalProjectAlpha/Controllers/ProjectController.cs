@@ -1,5 +1,4 @@
 ﻿using FinalProjectAlpha.Models;
-using Freezer.Core;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -9,10 +8,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Freezer;
 using System.Threading;
 using System.Drawing.Imaging;
-
 using System.Windows.Forms;
 using Microsoft.AspNet.Identity;
 using System.Diagnostics;
@@ -22,7 +19,8 @@ using GrabzIt.Parameters;
 
 namespace FinalProjectAlpha.Controllers
 {
-    [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+    //[PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+    
     public class ProjectController : Controller
     {
 
@@ -53,6 +51,8 @@ namespace FinalProjectAlpha.Controllers
         }
        
        //Save() saves one Archive object into the database
+       [HttpPost]
+       [Authorize]
         public ActionResult Save(string ProjectName, string TeamName, string Link, string RepoLink, string ShortDesc, string LongDesc)
         {
             //get db
@@ -85,6 +85,9 @@ namespace FinalProjectAlpha.Controllers
             return RedirectToAction("Details", "Project", new { Link = archive.Link });
 
         }
+
+        [HttpPost]
+        [Authorize]
         public ActionResult EditPage(string Link)
         {   
             //get db
@@ -100,6 +103,7 @@ namespace FinalProjectAlpha.Controllers
         //attribute tells the routing engine(mvc) to send any POST requests to that action method to the one method over the other.Ask Kamel
         //Method that changes an archive in db. only sends info we want to edit.
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(Archive editedArchive)
         {   //
             waybackdbEntities dbContext = new waybackdbEntities();
@@ -187,6 +191,7 @@ namespace FinalProjectAlpha.Controllers
                 return saveLinkInDB(Link);
             }
         }
+        
         public bool saveLinkInDB(string inputUrl)
         {
             // Create a request for the API. 

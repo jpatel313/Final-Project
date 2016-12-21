@@ -1,5 +1,4 @@
 ﻿using FinalProjectAlpha.Models;
-using Freezer.Core;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -9,10 +8,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Freezer;
 using System.Threading;
 using System.Drawing.Imaging;
-
 using System.Windows.Forms;
 using Microsoft.AspNet.Identity;
 using System.Diagnostics;
@@ -27,6 +24,7 @@ namespace FinalProjectAlpha.Controllers
     {
 
         #region Actions
+        
         public ActionResult Details(string Link)    // returns one archived website in iframe, with details
         {
             //get db
@@ -60,6 +58,7 @@ namespace FinalProjectAlpha.Controllers
             //savelink() tries to save link and returns false if error... changes ViewBag.errorMessage, accordingly 
             if ((saveLink(Link)) == false) //If we get an error (false)     refactor to try/catch
             {
+
                 return View("New");
             }
 
@@ -280,7 +279,6 @@ namespace FinalProjectAlpha.Controllers
             ViewBag.errormessage = "Something went wrong, closest not null but available not true.";
             return false;//we had an error
         }
-
 
         public string archiveLink(string inputUrl)
         {

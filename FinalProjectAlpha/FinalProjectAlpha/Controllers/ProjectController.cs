@@ -27,6 +27,9 @@ namespace FinalProjectAlpha.Controllers
         
         public ActionResult Details(string Link)    // returns one archived website in iframe, with details
         {
+            
+            
+            
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
 
@@ -46,13 +49,14 @@ namespace FinalProjectAlpha.Controllers
         
         //This is the page that contains the form for adding pages
         public ActionResult New()
-        {
+        {//Background image can be changed from here.
+            ViewBag.background = @Url.Content("~/Content/NewProject.gif");
             return View();
         }
        
        //Save() saves one Archive object into the database
         public ActionResult Save(string ProjectName, string TeamName, string Link, string RepoLink, string ShortDesc, string LongDesc)
-        {
+        {   
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
             //savelink() tries to save link and returns false if error... changes ViewBag.errorMessage, accordingly 
@@ -85,7 +89,9 @@ namespace FinalProjectAlpha.Controllers
 
         }
         public ActionResult EditPage(string Link)
-        {   
+        {   //Background image can be changed from here.
+            ViewBag.background = @Url.Content("~/Content/NewProject.gif");
+
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
 

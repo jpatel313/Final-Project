@@ -1,72 +1,80 @@
-﻿
-
-    <div class="n ">
-
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="Home" content="width=device-width" />
+    <title>KeepProjects</title>
+</head>
+  <body>      
         <center>
             <h1>Hot Tub Time Portal</h1>
             <p class="jumbotron">
-                <img src="http://blogs.kentlaw.iit.edu/library/files/2015/11/19350-wabac_machine_teaser.jpg">
+                <img src="~/Content/KeepProjectsHome.jpg">
                 <br />
-                <h3>Harness the power of archiving your website, project or personal website pinterest!</h3>
+                <h3>Harness the power of archiving your website, project or create a website pinterest!</h3>
             </p>
         </center>
-    </div>
+    
 
 
     <!-- Page Content -->
     <div class="container">
 
     </div>
+
     @*<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
         </a>
         <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>*@
-    </div>
-    </div>
+        </a>
+    </div>*@
 
-    </div>
-
-
-    <div class="panel panel-collapse">
-        <div class="slide">
-            @foreach (var item in ViewBag.ArList)
+    <div class="panel panel-primary" >
+        
+            @*Need to fix project thumbnail layout here*@       
+         <div class="row flex-items-sm-left" >
+            
+                @foreach (var item in ViewBag.ArList)
             {
 
-                <div class="col-sm-3 col-lg-3 col-md-3">
-                    @*Live site screenshot here.*@
-                    <div class="thumbnail">
-                        @{
-                            if (item.SnapShot != null)
-                            {
-                                var base64 = Convert.ToBase64String(item.SnapShot);
-                                var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
-                                ViewBag.imgSrc = imgSrc;
-                            }
-                            else
-                            {
-                                ViewBag.imgSrc = "http://placehold.it/500x300";
-                            }
-                        }
+                    <div class="col-sm-3 col-lg-3 col-md-3">
+ 
+                                @*<div class="clearfix visible-md"></div>*@
+                                @*Live site screenshot here.*@
+                                <div class="thumbnail">
+                                    @{
+                                        if (item.SnapShot != null)
+                                        {
+                                            var base64 = Convert.ToBase64String(item.SnapShot);
+                                            var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
+                                            ViewBag.imgSrc = imgSrc;
+                                        }
+                                        else
+                                        {
+                                            ViewBag.imgSrc = "http://placehold.it/500x300";
+                                        }
+                                    }
 
-                        <img src="@ViewBag.imgSrc" height="500" width="300" />
+                                    <img src="@ViewBag.imgSrc" height="500" width="300" />
 
-                        <div class="caption">
-                            <h4>
-                                @item.ProjectName @*Placeholder, We want a Project NAME here.*@
-                            </h4>
-                            <p>@item.ShortDesc</p>
-                            <p>
-                                <a href="@item.ArchiveLink" class="btn btn-primary btn-sm" role="button">Archive</a>
-                                <a href="/Project/Details?Link=@item.Link" class="btn btn-info btn-sm" role="button">Details</a>
-                                <a href="@item.Link" class="btn btn-default btn-sm" role="button">Live</a>
-                            </p>
+                                    <div class="caption">
+                                        <h4>
+                                            @item.ProjectName @*Placeholder, We want a Project NAME here.*@
+                                        </h4>
+                                        <p>@item.ShortDesc</p>
+                                        <p>
+                                            <a href="@item.ArchiveLink" class="btn btn-primary btn-sm" role="button">Archive</a>
+                                            <a href="/Project/Details?Link=@item.Link" class="btn btn-info btn-sm" role="button">Details</a>
+                                            <a href="@item.Link" class="btn btn-default btn-sm" role="button">Live</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            
                         </div>
-                    </div>
-                </div>
-                            }
-        </div>
+                                }
+            </div>
+        
     </div>
 
-
+</body>
+</html>

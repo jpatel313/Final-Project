@@ -25,8 +25,12 @@ namespace FinalProjectAlpha.Controllers
     {
 
         #region Actions
+        
         public ActionResult Details(string Link)    // returns one archived website in iframe, with details
         {
+            
+            
+            
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
 
@@ -46,7 +50,8 @@ namespace FinalProjectAlpha.Controllers
         
         //This is the page that contains the form for adding pages
         public ActionResult New()
-        {
+        {//Background image can be changed from here.
+            ViewBag.background = @Url.Content("~/Content/NewProject.gif");
             return View();
         }
        
@@ -54,12 +59,13 @@ namespace FinalProjectAlpha.Controllers
        [HttpPost]
        [Authorize]
         public ActionResult Save(string ProjectName, string TeamName, string Link, string RepoLink, string ShortDesc, string LongDesc)
-        {
+        {   
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
             //savelink() tries to save link and returns false if error... changes ViewBag.errorMessage, accordingly 
             if ((saveLink(Link)) == false) //If we get an error (false)     refactor to try/catch
             {
+
                 return View("New");
             }
 
@@ -89,7 +95,9 @@ namespace FinalProjectAlpha.Controllers
         [HttpPost]
         [Authorize]
         public ActionResult EditPage(string Link)
-        {   
+        {   //Background image can be changed from here.
+            ViewBag.background = @Url.Content("~/Content/NewProject.gif");
+
             //get db
             waybackdbEntities dbContext = new waybackdbEntities();
 
@@ -291,7 +299,6 @@ namespace FinalProjectAlpha.Controllers
             ViewBag.errormessage = "Something went wrong, closest not null but available not true.";
             return false;//we had an error
         }
-
 
         public string archiveLink(string inputUrl)
         {

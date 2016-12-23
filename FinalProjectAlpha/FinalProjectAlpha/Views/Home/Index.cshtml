@@ -1,58 +1,60 @@
-﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="Home" content="width=device-width" />
+    <title>KeepProjects</title>
+</head>
 
-    <div meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
-        
-        <center>
-            <h1>Hot Tub Time Portal</h1>
-            <p class="jumbotron">
-                <img src="http://blogs.kentlaw.iit.edu/library/files/2015/11/19350-wabac_machine_teaser.jpg">
-                <br />
-                <h3>Harness the power of archiving your website, project or personal website pinterest!</h3>
-            </p>
-        </center>
-    </div>
+<body>
+    <center>
+        <h1>Hot Tub Time Portal</h1>
+
+        <p class="jumbotron">
+            <img src="~/Content/jumbotron.jpg" center>
+            <br />
+            <h3>Harness the power of archiving your website, project or create a website pinterest!</h3>
+        </p>
+    </center>
+
 
 
     <!-- Page Content -->
-    <div class="container">
-
-    </div>
-    @*<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>*@
-    <div></div>
-  
+    @*<div class="container">*@
 
 
-    <div class="panel panel-collapse">
-        <div class="slide">
+
+    <div class="panel-collapse">
+
+        @*Need to fix project thumbnail layout here*@
+        <div class="panel-primary">
+
             @foreach (var item in ViewBag.ArList)
             {
+                <div class="col-sm-3 col-lg-3 col-md-3" height="425px">
 
-                <div class="col-sm-4 col-lg-4 col-md-4">
                     @*Live site screenshot here.*@
                     <div class="thumbnail">
                         @{
                             if (item.SnapShot != null)
                             {
+
                                 var base64 = Convert.ToBase64String(item.SnapShot);
                                 var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
                                 ViewBag.imgSrc = imgSrc;
                             }
+
                             else
                             {
                                 ViewBag.imgSrc = "http://placehold.it/500x300";
                             }
                         }
-
+                        <!--Screenshot-->
                         <img src="@ViewBag.imgSrc" height="500" width="300" />
 
-                        <div class="caption">
+                        <div class="table">
                             <h4>
-                                @item.ProjectName @*Placeholder, We want a Project NAME here.*@
+                                <!--Project Name/Description/3 buttons-->
+                                @item.ProjectName
                             </h4>
                             <p>@item.ShortDesc</p>
                             <p>
@@ -62,9 +64,12 @@
                             </p>
                         </div>
                     </div>
+
                 </div>
                             }
         </div>
+
     </div>
 
-
+</body>
+</html>

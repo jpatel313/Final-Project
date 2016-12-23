@@ -45,8 +45,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Freezer, Version=1.0.1.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Freezer.1.0.1.5\lib\net45\Freezer.dll</HintPath>
+    <Reference Include="Facebook.CSSLayout, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.CSSLayout.1.1.1\lib\portable-net45+dnxcore50+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Facebook.CSSLayout.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="GrabzIt, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -250,6 +250,11 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dashboard.jpg" />
+    <Content Include="Content\Keeper1.jpg" />
+    <Content Include="Content\KeepProjectsHome.jpg" />
+    <Content Include="Content\NewProject.gif" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

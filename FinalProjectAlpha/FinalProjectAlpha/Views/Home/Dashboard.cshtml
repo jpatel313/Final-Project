@@ -1,18 +1,30 @@
 ﻿
 <!DOCTYPE html>
-
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/formcss/style.css" rel="stylesheet" />
+<style type="text/css">
+           body  {
+                background-image: url(@ViewBag.background);
+                background-repeat: repeat;
+                background-size: cover;
+            }
+</style>
 <html>
+
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
+    <meta name="dashboard" content="width=device-width" />
+    <title> Dashboard</title>
 </head>
-<body>
-    <div class="panel panel-collapse">
-        <div class="panel-body">
+ <body>
+
+     <center><h1>My Project Dashboard!</h1></center>
+    <p></p>
+    <div class="panel-collapse">
+        <div class="panel-primary">
            
                 @foreach (var item in ViewBag.userArchiveList)
                    {
-                    <div class="col-sm-3 col-lg-3 col-md-3">
+                    <div class="col-sm-4 col-lg-4 col-md-4">
                         @*Live site screenshot here.*@
                         <div class="thumbnail">
                            @{ 

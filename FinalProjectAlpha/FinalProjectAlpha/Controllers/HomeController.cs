@@ -12,6 +12,7 @@ namespace FinalProjectAlpha.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.background = @Url.Content("~/Content/Keeper1.jpg");
             waybackdbEntities dbContext = new waybackdbEntities();
 
             List<Archive> archiveList = dbContext.Archives.ToList();
@@ -36,7 +37,10 @@ namespace FinalProjectAlpha.Controllers
         }
 
         public ActionResult Dashboard(string Link)
-        {
+        {   
+            //Change background image here.
+            ViewBag.background = @Url.Content("~/Content/dashboard.jpg");
+            
             //Create DB Object. Get database
             waybackdbEntities Archives = new waybackdbEntities();
 

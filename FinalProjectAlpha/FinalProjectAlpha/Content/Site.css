@@ -22,4 +22,14 @@ select,
 textarea {
     max-width: 280px;
 }
-
+/*Set height of thumbnail divs to be fixed, set clearance to prevent floating boxes from overlapping, set margin to provide space b/tw*/
+.thumbnail {
+    margin-top: 10px;
+    clear: both;
+    height: 500px;
+}
+#sort-menu {
+    display: inline;
+    right: 0;
+    left: auto;
+}

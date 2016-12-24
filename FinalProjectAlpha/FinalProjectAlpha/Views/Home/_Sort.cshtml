@@ -1,0 +1,131 @@
+﻿@model IEnumerable<FinalProjectAlpha.Models.Archive>
+
+<style type="text/css">
+           body  {
+                background-image: url(@Url.Content("~/Content/Keeper1.jpg"));
+                background-repeat: repeat;
+                background-size: cover;
+            }
+</style>
+
+<!-- Page Content -->
+<div class="container">
+    
+
+<div class="panel-collapse">
+
+    <div class="panel-primary">
+        @if (ViewBag.Found != null)
+            {
+                foreach (var item in ViewBag.Found)
+                {
+                <div class="col-sm-3 col-lg-3 col-md-3" height="425px">
+
+                    @*Live site screenshot here.*@
+                    <di class="thumbnail">
+                        @{
+                            if (item.SnapShot != null)
+                            {
+
+                                var base64 = Convert.ToBase64String(item.SnapShot);
+                                var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
+                                ViewBag.imgSrc = imgSrc;
+                            }
+
+                            else
+                            {
+                                ViewBag.imgSrc = "http://placehold.it/500x300";
+                            }
+                        }
+                        <!--Screenshot-->
+                        <img src="@ViewBag.imgSrc" height="500" width="300" />
+                        <div class="table">
+                            <h4>
+                                <!--Project Name/Description/3 buttons-->
+                                @item.ProjectName
+                            </h4>
+                            <p class="short-desc">@item.ShortDesc</p>
+                            <p>
+                                <a href="@item.ArchiveLink" class="btn btn-primary btn-sm" role="button">Archive</a>
+                                <a href="/Project/Details?Link=@item.Link" class="btn btn-info btn-sm" role="button">Details</a>
+                                <a href="@item.Link" class="btn btn-default btn-sm" role="button">Live</a>
+                            </p>
+                        </div>
+                </div>
+
+                                }
+                            }
+                            else
+                            { <h2>  No Project matching your search could be found.  Try another search. </h2>}
+    </div>
+</div>
+
+@*@if (ViewBag.Found != null)
+        {
+            foreach (var item in ViewBag.Found)
+            {
+                <div>
+                    if(item.ProjectName != null)
+                    {            <h4>@item.ProjectName</h4>
+                    <div>@item.AspNetUser, @item.UserID</div>
+                    }
+                </div>
+        }
+    }
+    else
+    {
+        <h2>@ViewBag.errorMessage</h2>
+    }*@
+
+@*@{var listItems = new List<SelectListItem>
+    {
+           new SelectListItem() {Text = "Project Name", Value="ProjectName"},
+           new SelectListItem() {Text = "Date Archived", Value="ArchiveDate"},
+           new SelectListItem() {Text = "User Name", Value="UserID"}
+    };
+    }
+    <div class="dropdown-toggle pull-right" id="sort-menu" name="sortBy">
+        @Html.Label("Sort by:")
+        @Html.DropDownList("Sort Projects by:", new SelectList(listItems, "Value", "Text"))
+    </div>*@
+</div>
+@*dropdown SortyBy: (Project/Sort)*@
+@*<form action="sort" method="get" name="sortBy">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <button type="button" class="btn btn-secondary">Ascending</button>
+            <button type="button" class="btn btn-secondary">Descending</button>
+
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort by:
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="@Model.ArchiveDate">Date Archived</a>
+                    <a class="dropdown-item" href="@Model.ProjectName">Project Name</a>
+
+                </div>
+            </div>
+        </div>
+    </form>*@
+@*<form>
+        <div class="btn-group dropdown-menu-right pull-right">
+            <button type="button" class="btn btn-default dropdown-toggle" action="Home/Sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sort Projects by: <span class="caret"></span>
+            </button>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><input type="submit" value="Project Name"></li>
+                <li><a href="#">Date Archived</a></li>
+                <li><a href="#">User Name</a></li>
+                <li><a href="#">Team Name</a></li>
+            </ul>
+            @{ViewBag.Sort}
+
+        </div>
+    </form>*@
+@*</div>*@
+
+
+
+
+

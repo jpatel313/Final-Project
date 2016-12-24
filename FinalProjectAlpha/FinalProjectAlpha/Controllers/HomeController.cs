@@ -35,6 +35,18 @@ namespace FinalProjectAlpha.Controllers
 
             return View();
         }
+        //[HttpGet]
+        public ActionResult Search(string searchTerm)
+        {
+            waybackdbEntities dbContext = new waybackdbEntities();      // create ORM obj
+                                                                        //find the archive record(s) and put in the bag
+            ViewBag.Found = dbContext.Archives.Where(x => x.ProjectName.Contains(searchTerm) || x.ShortDesc.Contains(searchTerm) || x.UserID.Contains(searchTerm));
+
+            //check for null in cshtml
+            ViewBag.errorMessage = "No Project with " + searchTerm + " in the name or description could be found.  Try another search.";
+
+            return View("Index");
+        }
 
         public ActionResult Dashboard(string Link)
         {   

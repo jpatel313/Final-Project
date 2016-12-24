@@ -17,8 +17,9 @@
           <Property Name="SnapShot" Type="varbinary(max)" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ProjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ArchiveDate" Type="datetime" Nullable="false" />
+          <Property Name="ArchiveDate" Type="datetime" />
           <Property Name="TeamName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PrivateLink" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
@@ -99,9 +100,10 @@
           <Property Name="SnapShot" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ArchiveDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ArchiveDate" Type="DateTime" Precision="3" />
           <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="waybackdbModel.FK_Archives_AspNetUsers1" FromRole="Archive" ToRole="AspNetUser" />
+          <Property Name="PrivateLink" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Archives_AspNetUsers1">
           <End Type="waybackdbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -142,7 +144,8 @@
     <EntitySetMapping Name="Archives">
       <EntityTypeMapping TypeName="IsTypeOf(waybackdbModel.Archive)">
         <MappingFragment StoreEntitySet="Archives">
-          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="PrivateLink" ColumnName="PrivateLink" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
           <ScalarProperty Name="ArchiveLink" ColumnName="ArchiveLink" />
           <ScalarProperty Name="RepoLink" ColumnName="RepoLink" />
           <ScalarProperty Name="ShortDesc" ColumnName="ShortDesc" />

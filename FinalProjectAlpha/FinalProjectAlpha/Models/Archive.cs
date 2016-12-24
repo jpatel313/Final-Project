@@ -11,7 +11,7 @@ namespace FinalProjectAlpha.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Archive
     {
         #region Constructors
@@ -28,6 +28,7 @@ namespace FinalProjectAlpha.Models
             ArchiveDate = DateTime.Today;
             TeamName = teamName;
             this.AspNetUser = aspNetUser;
+            PrivateLink = false;
         }
         public Archive()
         {
@@ -44,7 +45,7 @@ namespace FinalProjectAlpha.Models
         public string ProjectName { get; set; }
         public System.DateTime ArchiveDate { get; set; }
         public string TeamName { get; set; }
-    
+        public bool PrivateLink { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
         #endregion
     }

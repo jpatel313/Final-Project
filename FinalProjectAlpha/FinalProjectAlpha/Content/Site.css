@@ -26,7 +26,11 @@ textarea {
 .thumbnail {
     margin-top: 10px;
     clear: both;
-    height: 500px;
+    height: 400px;
+}
+.short-desc {
+    min-height: 60px;
+    max-height: 70px;
 }
 #sort-menu {
     display: inline;

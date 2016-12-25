@@ -56,8 +56,7 @@ namespace FinalProjectAlpha.Controllers
         }
        
        //Save() saves one Archive object into the database
-       [HttpPost]
-       [Authorize]
+      
         public ActionResult Save(string ProjectName, string TeamName, string Link, string RepoLink, string ShortDesc, string LongDesc)
         {   
             //get db
@@ -92,8 +91,6 @@ namespace FinalProjectAlpha.Controllers
 
         }
 
-        [HttpPost]
-        [Authorize]
         public ActionResult EditPage(string Link)
         {   //Background image can be changed from here.
             ViewBag.background = @Url.Content("~/Content/NewProject.gif");
@@ -103,15 +100,13 @@ namespace FinalProjectAlpha.Controllers
 
             //Finds one matching archive
             Archive archive = dbContext.Archives.Find(Link);
-
-           
+ 
             //sends the archive to the view
             return View(archive);
         }
         //attribute tells the routing engine(mvc) to send any POST requests to that action method to the one method over the other.Ask Kamel
         //Method that changes an archive in db. only sends info we want to edit.
         [HttpPost]
-        [Authorize]
         public ActionResult Edit(Archive editedArchive)
         {   //
             waybackdbEntities dbContext = new waybackdbEntities();
@@ -141,8 +136,6 @@ namespace FinalProjectAlpha.Controllers
 
         }
         //to be called when a delete button is made
-
-        [HttpPost]
         public ActionResult Delete(string Link)
         {
             waybackdbEntities dbContext = new waybackdbEntities();
@@ -371,6 +364,7 @@ namespace FinalProjectAlpha.Controllers
             {
                 Application.DoEvents();
             }
+
             // Set the size of the WebBrowser control
             wb.Width = width;
             wb.Height = height;
@@ -378,8 +372,6 @@ namespace FinalProjectAlpha.Controllers
             Bitmap bitmap = new Bitmap(wb.Width, wb.Height);
             wb.DrawToBitmap(bitmap, new System.Drawing.Rectangle(0, 0, wb.Width, wb.Height));
 
-       
-           
             wb.Dispose();
 
             return bitmap;
@@ -405,12 +397,9 @@ namespace FinalProjectAlpha.Controllers
             grabzIt.URLToImage(url, m);
 
             byte[] bytes = grabzIt.SaveTo().Bytes;
+
             return bytes; 
-
-
         }
         #endregion
-
-
     }
 }

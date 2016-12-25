@@ -79,8 +79,10 @@ namespace FinalProjectAlpha.Controllers
             //gets currently logged in user
             string UserID = User.Identity.GetUserId();
 
+            //Change this hardcode after public/private option added:
+             bool PrivateLink = false;
             //create Archive obj 
-            Archive archive = new Archive(Link, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot, UserID, TeamName, ProjectName);
+            Archive archive = new Archive(Link, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot, UserID, TeamName, ProjectName, PrivateLink);
 
             //Add to db, save
             dbContext.Archives.Add(archive);

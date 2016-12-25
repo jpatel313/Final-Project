@@ -14,27 +14,6 @@ namespace FinalProjectAlpha.Models
 
     public partial class Archive
     {
-        #region Constructors
-        public Archive(string link, string archiveLink, string repoLink, string shortDesc, string longDesc, byte[] snapShot, string userID, string projectName, string teamName, AspNetUser aspNetUser = null)
-        {
-            Link = link;
-            ArchiveLink = archiveLink;
-            RepoLink = repoLink;
-            ShortDesc = shortDesc;
-            LongDesc = longDesc;
-            SnapShot = snapShot;
-            UserID = userID;
-            ProjectName = projectName;
-            ArchiveDate = DateTime.Today;
-            TeamName = teamName;
-            this.AspNetUser = aspNetUser;
-            PrivateLink = false;
-        }
-        public Archive()
-        {
-        }
-        #endregion
-        #region Properties
         public string Link { get; set; }
         public string ArchiveLink { get; set; }
         public string RepoLink { get; set; }
@@ -47,6 +26,23 @@ namespace FinalProjectAlpha.Models
         public string TeamName { get; set; }
         public bool PrivateLink { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
-        #endregion
+        public Archive(string link, string archiveLink, string repoLink, string shortDesc, string longDesc, byte[] snapShot, string userID, string projectName, string teamName, bool PrivateLink)
+        {
+            Link = link;
+            ArchiveLink = archiveLink;
+            RepoLink = repoLink;
+            ShortDesc = shortDesc;
+            LongDesc = longDesc;
+            SnapShot = snapShot;
+            UserID = userID;
+            ProjectName = projectName;
+            ArchiveDate = DateTime.Today;
+            TeamName = teamName;
+            this.PrivateLink = PrivateLink;
+        }
+        public Archive()
+        {
+        }
+
     }
 }

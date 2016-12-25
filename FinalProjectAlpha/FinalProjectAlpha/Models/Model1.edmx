@@ -19,7 +19,7 @@
           <Property Name="ProjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ArchiveDate" Type="datetime" />
           <Property Name="TeamName" Type="nvarchar" MaxLength="50" />
-          <Property Name="PrivateLink" Type="bit" Nullable="false" />
+          <Property Name="PrivateLink" Type="bit" Nullable="false" StoreGeneratedPattern="None" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
@@ -103,7 +103,7 @@
           <Property Name="ArchiveDate" Type="DateTime" Precision="3" />
           <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="waybackdbModel.FK_Archives_AspNetUsers1" FromRole="Archive" ToRole="AspNetUser" />
-          <Property Name="PrivateLink" Type="Boolean" Nullable="false" />
+          <Property Name="PrivateLink" Type="Boolean" Nullable="false" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" annotation:StoreGeneratedPattern="None" />
         </EntityType>
         <Association Name="FK_Archives_AspNetUsers1">
           <End Type="waybackdbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />

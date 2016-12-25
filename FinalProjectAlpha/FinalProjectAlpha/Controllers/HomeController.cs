@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using FinalProjectAlpha.Models;
 using Microsoft.AspNet.Identity;
+using System.Activities.Statements;
 
 namespace FinalProjectAlpha.Controllers
 {
@@ -12,13 +13,18 @@ namespace FinalProjectAlpha.Controllers
     {
         public ActionResult Index()
         {
+            //Change background image of homepage here.
             ViewBag.background = @Url.Content("~/Content/Keeper1.jpg");
+
+            //Create ORM Object to access database
             waybackdbEntities dbContext = new waybackdbEntities();
 
+            ////Turn Object into a List. Get all archives in it.
             List<Archive> archiveList = dbContext.Archives.ToList();
-
-            ViewBag.ArList = archiveList;   // return project records to the Index
-
+           
+            //Displays only links that are marked public(PrivateLink=false)
+            ViewBag.ArList =  dbContext.Archives.Where(x => x.PrivateLink.Equals(false));
+          
             return View();
         }
 
@@ -53,7 +59,7 @@ namespace FinalProjectAlpha.Controllers
             //Change background image here.
             ViewBag.background = @Url.Content("~/Content/dashboard.jpg");
             
-            //Create DB Object. Get database
+            //Create ORM Object to access database.
             waybackdbEntities Archives = new waybackdbEntities();
 
             //Turn Object into a List. Get all archives in it.

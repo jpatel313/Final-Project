@@ -40,7 +40,7 @@ namespace FinalProjectAlpha.Controllers
             // checks each item in db for matching primary key (to display selected record)
             foreach (var item in archiveList)
             {
-                if (item.Link == Link)
+                if (item.Link == Link && item.PrivateLink==false)
                 {//sends archive to page
                     ViewBag.Archive = item;
                 }

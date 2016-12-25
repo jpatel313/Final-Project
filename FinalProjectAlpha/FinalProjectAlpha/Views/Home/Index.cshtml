@@ -31,15 +31,17 @@
     <p><br /></p>
        @if(ViewBag.Found != null)
        {
-           Html.RenderPartial("_Sort");
+           Html.RenderPartial("_Sort");    
        }
+
      <div class="panel-collapse">
           <div class="panel-primary">
               @if (ViewBag.ArList != null)
               {
 
-                foreach (var item in ViewBag.ArList)
-                {
+                  foreach (var item in ViewBag.ArList)
+                  {
+
                     <div class="col-sm-3 col-lg-3 col-md-3" height="425px">
                         @*Live site screenshot here.*@
                         <div class="thumbnail">
@@ -73,8 +75,9 @@
                             </div>
                         </div>
                     </div>
-                                }
-                                }
+                                        }
+                                    }
+                               
             </div>
         </div>
 </body>

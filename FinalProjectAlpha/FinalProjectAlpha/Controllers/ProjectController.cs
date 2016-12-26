@@ -28,16 +28,14 @@ namespace FinalProjectAlpha.Controllers
         
         public ActionResult Details(string Link)    // returns one archived website in iframe, with details
         {
-            
-            
-            
-            //get db
+            //Create Entity ORM object to access DB.
             waybackdbEntities dbContext = new waybackdbEntities();
 
-            //create list  
+            //Create list.  
             List<Archive> archiveList = dbContext.Archives.ToList();
 
-            // checks each item in db for matching primary key (to display selected record)
+            // Checks each item in db for matching primary key (to display selected record)
+            //Only display if archive entity is marked public.
             foreach (var item in archiveList)
             {
                 if (item.Link == Link && item.PrivateLink==false)
@@ -48,53 +46,54 @@ namespace FinalProjectAlpha.Controllers
             return View();
         }
         
-        //This is the page that contains the form for adding pages
+        //This is the page that contains the form for adding new projecct pages.
         public ActionResult New()
-        {//Background image can be changed from here.
+        {
+            //Background image can be changed from here.
             ViewBag.background = @Url.Content("~/Content/NewProject.gif");
             return View();
         }
        
        //Save() saves one Archive object into the database
-      
         public ActionResult Save(string ProjectName, string TeamName, string Link, string RepoLink, string ShortDesc, string LongDesc)
-        {   
-            //get db
+        {
+            //Create Entity ORM object to access DB.
             waybackdbEntities dbContext = new waybackdbEntities();
-            //savelink() tries to save link and returns false if error... changes ViewBag.errorMessage, accordingly 
+
+            //Savelink() tries to save link and returns false if error... changes ViewBag.errorMessage, accordingly 
             if ((saveLink(Link)) == false) //If we get an error (false)     refactor to try/catch
             {
-
                 return View("New");
             }
 
-            //get wayback link from the wayback API
+            //Get the url that was archived using the wayback API.
             string ArchiveLink = archiveLink(Link);
 
             //Call screenshot method, input users website link.
-            // var SnapShot = SaveScreen(Link);
-
             var SnapShot = GetBytesFromImage(Link);
 
-            //gets currently logged in user
+            //Gets currently logged in user.
             string UserID = User.Identity.GetUserId();
 
             //Change this hardcode after public/private option added:
              bool PrivateLink = false;
-            //create Archive obj 
+            
+            //Create the Archive object to determine what will be sent to DB from Project/New. 
             Archive archive = new Archive(Link, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot, UserID, TeamName, ProjectName, PrivateLink);
 
-            //Add to db, save
+            //Adds changes to DB via Entity ORM.
             dbContext.Archives.Add(archive);
+
+            //Saves changes to DB via Entity ORM.
             dbContext.SaveChanges();
             
             //send user to Project/Details?Link=myurl.com
             return RedirectToAction("Details", "Project", new { Link = archive.Link });
-
         }
 
         public ActionResult EditPage(string Link)
-        {   //Background image can be changed from here.
+        {   
+            //Background image can be changed from here.
             ViewBag.background = @Url.Content("~/Content/NewProject.gif");
 
             //get db
@@ -106,11 +105,12 @@ namespace FinalProjectAlpha.Controllers
             //sends the archive to the view
             return View(archive);
         }
-        //attribute tells the routing engine(mvc) to send any POST requests to that action method to the one method over the other.Ask Kamel
-        //Method that changes an archive in db. only sends info we want to edit.
+
+        //Action method that edits archive's fields in DB. 
+        //(Gives this Actionresult priority over other methods & handles only Post requests.)
         [HttpPost]
         public ActionResult Edit(Archive editedArchive)
-        {   //
+        {
             waybackdbEntities dbContext = new waybackdbEntities();
             
             //Get original archive.
@@ -122,27 +122,31 @@ namespace FinalProjectAlpha.Controllers
             //Check if original archive Foreign key(userid) matches logged in user.
             if(oldArchive.UserID == UserID)
             {
-              //change the values in original archive to the edited values.
+                //Change the values in original archive to the edited values.
 
                 oldArchive.ProjectName = editedArchive.ProjectName;
                 oldArchive.TeamName = editedArchive.TeamName;
                 oldArchive.RepoLink = editedArchive.RepoLink;
                 oldArchive.ShortDesc = editedArchive.ShortDesc;
                 oldArchive.LongDesc = editedArchive.LongDesc;
+                oldArchive.PrivateLink = editedArchive.PrivateLink;
 
-               dbContext.SaveChanges();
-                }
+                //Saves changes to DB via Entity ORM.
+                dbContext.SaveChanges();
+            }
 
-            //send user to /home/dashboard
+                //Send user to /home/dashboard.
+
             return RedirectToAction("Dashboard", "Home");
 
         }
-        //to be called when a delete button is made
+
+        //To be called when a delete button is made.
         public ActionResult Delete(string Link)
         {
             waybackdbEntities dbContext = new waybackdbEntities();
 
-            //create list  
+            //Create list  
             List<Archive> archiveList = dbContext.Archives.ToList();
 
             //populate list with select object (by the input Link)  (refactor: use orm .find?)

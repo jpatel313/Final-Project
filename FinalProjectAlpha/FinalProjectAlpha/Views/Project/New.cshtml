@@ -77,9 +77,18 @@
                             </div>
                             <br />
                         </p>
+                        <br />
+                        
+                        <div class="input-group">
+                            @Html.RadioButtonFor(model => model.PrivateLink, "false", new { id = "public" })Allow others to see your project!
+                        <br />        
+                            @Html.RadioButtonFor(model => model.PrivateLink, "true", new { id = "private" })Make this project viewable from your dashboard:(
+                        <br />
+                        </div>
+                            <br />
 
-                        <input type="submit" id="save" class="btn btn-info " value="Submit">
-                    </h3>
+                            <input type="submit" id="save" class="btn btn-info " value="Submit">
+</h3>
                 </form>
             </div>
         </div>

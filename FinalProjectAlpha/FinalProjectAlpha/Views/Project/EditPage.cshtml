@@ -32,12 +32,12 @@
 
                     @Html.EditorFor(model => model.TeamName)
                 </div>
-                <br />
-                <div class="input-group">
+                @*<br />
+                <div class="input-group">*@
                     @*<input type="text" class="form-control" id="team" placeholder=@ViewBag.Archive.TeamName aria-describedby="basic-addon3" name="TeamName" />  <---- this code is kept so we can remember the classes we used to make stuff look more bootstrappy*@
 
-                    @Html.EditorFor(model => model.RepoLink)
-                </div>
+                    @*@Html.EditorFor(model => model.RepoLink)*@
+                @*</div>*@
                 <br />
                 <label for="basic-url">A short description of your project:</label>
                 <br />
@@ -52,6 +52,16 @@
                     @*<textarea class="form-control" id="longdesc" placeholder=@Model.LongDesc name="LongDesc" rows="3" column="200"></textarea> we saved this code also because we used a text area.*@
                 </div>
                 <br />
+
+                <div class="input"[type="radio"]>
+                    <label for="basic-url">Allow others to see your project!</label> <br />
+                    @Html.RadioButtonFor(model => model.PrivateLink, "false", new { id = "public" })
+                   
+                    <label for="basic-url">Make this project private:(</label> <br />
+                    @Html.RadioButtonFor(model => model.PrivateLink, "true", new { id = "private" })
+                    <br />
+                </div>
+
                 @*Once we hit submit, we go to the "Edit" action (located at the top of the form)*@
                 <input type="submit" id="Edit" class="btn btn-info " value="Submit">
             </form>

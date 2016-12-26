@@ -27,38 +27,22 @@ namespace FinalProjectAlpha.Controllers
 
         #region Actions
 
-        public ActionResult Details(string Link, bool PrivateLink)    // returns one archived website in iframe, with details
+        public ActionResult Details(string Link)   // returns one archived website in iframe, with details
         {
             //Create Entity ORM object to access DB.
             waybackdbEntities dbContext = new waybackdbEntities();
 
             //Create list.  
             List<Archive> archiveList = dbContext.Archives.ToList();
-            List<Archive> publicList = new List<Archive>();
-
-            //Get the current logged in user id. Needed to ensure private projects.
-            string CurrentUserId = User.Identity.GetUserId();
 
             // Checks each item in db for matching primary key (to display selected record)
             //Only display if archive entity is marked public.
-
             foreach (var item in archiveList)
             {
-                //Find archive matching primary key(Link).
-                if (item.Link == Link && item.PrivateLink.Equals(false))
-                {
+                if (item.Link == Link && item.PrivateLink==false)
+                {//sends archive to page
                     ViewBag.Archive = item;
-                    return View();
                 }
-                //See if current user is logged in and private project access.
-                else if (item.UserID == CurrentUserId && item.PrivateLink.Equals(true||false))
-                {
-                    //if (item.UserID == CurrentUserId)
-                    ViewBag.Archive = item;
-                    
-                   return View();
-                }
-           
             }
             return View();
         }

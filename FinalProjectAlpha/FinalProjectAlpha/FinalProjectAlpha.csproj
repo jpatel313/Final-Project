@@ -284,7 +284,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="ClassDiagram2.cd" />
-    <Content Include="ClassDiagram3.cd" />
     <None Include="Properties\PublishProfiles\KeepProject1 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\keepprojects15 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />

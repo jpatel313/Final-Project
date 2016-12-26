@@ -14,12 +14,15 @@
         <div class="form-horizontal">
             @*runs the action "Edit" inside the Project controller*@
             <form id="Edit" action="Edit" method="post">
-                <label for="basic-url">Your Project Name:</label>
-                <br />
+               
                 @*"Html" is a "helper class" for creating editors and other useful things in HTML*@
                 @*the "HiddenFor" Method, sends data to the action following the form without telling the user*@
                 @*Here we send the Link, as it is the primary key and used to identify the object*@
+
                 @Html.HiddenFor(model => model.Link)
+
+                <label for="basic-url">Your Project Name:</label>
+                <br />
                 <div class="input-group">
                     @*"EditorFor" is a method that shows a text box for a specific field, and pre fills it in with data that is already in the property*@
                     @Html.EditorFor(model => model.ProjectName)
@@ -29,15 +32,14 @@
                 <br />
                 <div class="input-group">
                     @*<input type="text" class="form-control" id="team" placeholder=@ViewBag.Archive.TeamName aria-describedby="basic-addon3" name="TeamName" />  <---- this code is kept so we can remember the classes we used to make stuff look more bootstrappy*@
-
                     @Html.EditorFor(model => model.TeamName)
                 </div>
-                @*<br />
-                <div class="input-group">*@
-                    @*<input type="text" class="form-control" id="team" placeholder=@ViewBag.Archive.TeamName aria-describedby="basic-addon3" name="TeamName" />  <---- this code is kept so we can remember the classes we used to make stuff look more bootstrappy*@
-
-                    @*@Html.EditorFor(model => model.RepoLink)*@
-                @*</div>*@
+                 <br />
+            <label for="basic-url">Repository Link:</label>
+                <br />
+                <div class="input-group">
+                    @Html.EditorFor(model => model.RepoLink)
+                </div>
                 <br />
                 <label for="basic-url">A short description of your project:</label>
                 <br />
@@ -52,13 +54,11 @@
                     @*<textarea class="form-control" id="longdesc" placeholder=@Model.LongDesc name="LongDesc" rows="3" column="200"></textarea> we saved this code also because we used a text area.*@
                 </div>
                 <br />
-
-                <div class="input"[type="radio"]>
-                    <label for="basic-url">Allow others to see your project!</label> <br />
-                    @Html.RadioButtonFor(model => model.PrivateLink, "false", new { id = "public" })
-                   
-                    <label for="basic-url">Make this project private:(</label> <br />
-                    @Html.RadioButtonFor(model => model.PrivateLink, "true", new { id = "private" })
+                <!--Button to allow user to choose if project is public.Validated in archive model-->
+                <div class="radio"> 
+                    @Html.RadioButtonFor(model => model.PrivateLink, "false")Allow others to see your project!(Frontpage!)
+                    <br>
+                    @Html.RadioButtonFor(model => model.PrivateLink, "true")Make this project private(Viewable from Dashboard)
                     <br />
                 </div>
 
@@ -76,7 +76,7 @@
                 Kept for stretch goals*@
     </div>
 </div>
-@*Scripts used for validation in our New page*@
+@*Scripts used for validation in our Edit page*@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script src="~/Scripts/saveform.js"></script>

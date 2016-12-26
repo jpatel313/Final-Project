@@ -24,24 +24,41 @@ namespace FinalProjectAlpha.Controllers
     public class ProjectController : Controller
     {
 
+
         #region Actions
-        
-        public ActionResult Details(string Link)    // returns one archived website in iframe, with details
+
+        public ActionResult Details(string Link, bool PrivateLink)    // returns one archived website in iframe, with details
         {
             //Create Entity ORM object to access DB.
             waybackdbEntities dbContext = new waybackdbEntities();
 
             //Create list.  
             List<Archive> archiveList = dbContext.Archives.ToList();
+            List<Archive> publicList = new List<Archive>();
+
+            //Get the current logged in user id. Needed to ensure private projects.
+            string CurrentUserId = User.Identity.GetUserId();
 
             // Checks each item in db for matching primary key (to display selected record)
             //Only display if archive entity is marked public.
+
             foreach (var item in archiveList)
             {
-                if (item.Link == Link && item.PrivateLink==false)
-                {//sends archive to page
+                //Find archive matching primary key(Link).
+                if (item.Link == Link && item.PrivateLink.Equals(false))
+                {
                     ViewBag.Archive = item;
+                    return View();
                 }
+                //See if current user is logged in and private project access.
+                else if (item.UserID == CurrentUserId && item.PrivateLink.Equals(true||false))
+                {
+                    //if (item.UserID == CurrentUserId)
+                    ViewBag.Archive = item;
+                    
+                   return View();
+                }
+           
             }
             return View();
         }
@@ -55,7 +72,7 @@ namespace FinalProjectAlpha.Controllers
         }
        
        //Save() saves one Archive object into the database
-        public ActionResult Save(string ProjectName, string TeamName, string Link, string RepoLink, string ShortDesc, string LongDesc)
+        public ActionResult Save(string ProjectName, string TeamName, string Link, string RepoLink, string ShortDesc, string LongDesc, bool PrivateLink)
         {
             //Create Entity ORM object to access DB.
             waybackdbEntities dbContext = new waybackdbEntities();
@@ -76,7 +93,7 @@ namespace FinalProjectAlpha.Controllers
             string UserID = User.Identity.GetUserId();
 
             //Change this hardcode after public/private option added:
-             bool PrivateLink = false;
+            // bool PrivateLink = false;
             
             //Create the Archive object to determine what will be sent to DB from Project/New. 
             Archive archive = new Archive(Link, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot, UserID, TeamName, ProjectName, PrivateLink);

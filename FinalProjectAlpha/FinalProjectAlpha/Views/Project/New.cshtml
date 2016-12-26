@@ -78,11 +78,11 @@
                             <br />
                         </p>
                         <br />
-                        
+                        <!--Button to allow user to choose if project is public.Validated in archive model-->
                         <div class="input-group">
-                            @Html.RadioButtonFor(model => model.PrivateLink, "false", new { id = "public" })Allow others to see your project!
-                        <br />        
-                            @Html.RadioButtonFor(model => model.PrivateLink, "true", new { id = "private" })Make this project viewable from your dashboard:(
+                            @Html.RadioButtonFor(model => model.PrivateLink, "false"@*, new { id = "public" }*@)Allow others to see your project!
+                            <br />        
+                            @Html.RadioButtonFor(model => model.PrivateLink, "true"@*, new { id = "private" }*@)Make this project only viewable from your dashboard:(
                         <br />
                         </div>
                             <br />

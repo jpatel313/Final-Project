@@ -50,12 +50,16 @@
                                 </h4>
 
                                 <p>@item.ShortDesc</p>
+                                <div>
                                 <p>
                                     <a href="@item.ArchiveLink" class="btn btn-primary btn-sm" role="button">Archive</a>
                                     <a href="/Project/Details?Link=@item.Link" class="btn btn-info btn-sm" role="button">Details</a>
                                     <a href="@item.Link" class="btn btn-default btn-sm" role="button">Live</a>
                                     <a href="/Project/EditPage?Link=@item.Link" class="btn btn-danger btn-sm" role="button">Edit</a>
+                                            <!--Delete button reserved for when Admin Roles are implemented  
+                                    <a href="/Project/Delete?Link=@item.Link" class="btn btn-danger btn-sm" role="button">Delete</a>-->
                                 </p>
+                                </div>
                             </div>
                         </div>
                     </div>

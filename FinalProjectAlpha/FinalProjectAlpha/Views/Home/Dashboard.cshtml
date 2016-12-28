@@ -23,23 +23,23 @@
         <div class="panel-primary">
            
                 @foreach (var item in ViewBag.userArchiveList)
-                   {
+                {
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         @*Live site screenshot here.*@
                         <div class="thumbnail">
                            @{ 
-           
-                                if (item.SnapShot != null)
-                                {
-                                    var base64 = Convert.ToBase64String(item.SnapShot);
-                                    var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
-                                    ViewBag.imgSrc = imgSrc;
-                                }
 
-                                else
-                                {
-                                    ViewBag.imgSrc = "http://placehold.it/500x300";
-                                }
+                               if (item.SnapShot != null)
+                               {
+                                   var base64 = Convert.ToBase64String(item.SnapShot);
+                                   var imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
+                                   ViewBag.imgSrc = imgSrc;
+                               }
+
+                               else
+                               {
+                                   ViewBag.imgSrc = "http://placehold.it/500x300";
+                               }
                              }
 
                                 <img src= "@ViewBag.imgSrc"height="500" width="300" /> 
@@ -52,10 +52,21 @@
                                 <p>@item.ShortDesc</p>
                                 <div>
                                 <p>
-                                    <a href="@item.ArchiveLink" class="btn btn-primary btn-sm" role="button">Archive</a>
-                                    <a href="/Project/Details?Link=@item.Link" class="btn btn-info btn-sm" role="button">Details</a>
-                                    <a href="@item.Link" class="btn btn-default btn-sm" role="button">Live</a>
-                                    <a href="/Project/EditPage?Link=@item.Link" class="btn btn-danger btn-sm" role="button">Edit</a>
+                                <a href="@item.ArchiveLink" class="btn btn-primary btn-sm" role="button">Archive</a>
+                               
+                                    <!--If statements to determine which button will display:-->
+                                @{ 
+                                    if (@item.PrivateLink == false)
+                                    {
+                                <a href="/Project/Details?Link=@item.Link" class="btn btn-info btn-sm" role="button">Details</a>
+                                    }
+                                    if (@item.PrivateLink == true)
+                                    {
+                                <a href="/Project/_PrivateDetails?Link=@item.Link" class="btn btn-info btn-sm" role="button">Details (Private)</a>
+                                    }
+                                 }
+                                <a href="@item.Link" class="btn btn-default btn-sm" role="button">Live</a>
+                                <a href="/Project/EditPage?Link=@item.Link" class="btn btn-danger btn-sm" role="button">Edit</a>
                                             <!--Delete button reserved for when Admin Roles are implemented  
                                     <a href="/Project/Delete?Link=@item.Link" class="btn btn-danger btn-sm" role="button">Delete</a>-->
                                 </p>

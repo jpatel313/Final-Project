@@ -11,7 +11,6 @@ namespace FinalProjectAlpha.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
 
     public partial class Archive
     {
@@ -23,12 +22,13 @@ namespace FinalProjectAlpha.Models
         public byte[] SnapShot { get; set; }
         public string UserID { get; set; }
         public string ProjectName { get; set; }
-        public System.DateTime ArchiveDate { get; set; }
-        public string TeamName { get; set; } 
-
+        public Nullable<System.DateTime> ArchiveDate { get; set; }
+        public string TeamName { get; set; }
         public bool PrivateLink { get; set; }
+
         public virtual AspNetUser AspNetUser { get; set; }
-        public Archive(string link, string archiveLink, string repoLink, string shortDesc, string longDesc, byte[] snapShot, string userID, string projectName, string teamName, bool PrivateLink)
+
+        public Archive(string link, string archiveLink, string repoLink, string shortDesc, string longDesc, byte[] snapShot, string userID, string projectName, string teamName, bool privateLink)
         {
             Link = link;
             ArchiveLink = archiveLink;
@@ -40,17 +40,10 @@ namespace FinalProjectAlpha.Models
             ProjectName = projectName;
             ArchiveDate = DateTime.Today;
             TeamName = teamName;
-            this.PrivateLink = PrivateLink;
+            PrivateLink = privateLink;
         }
         public Archive()
         {
         }
-
-        //public Archive(string link, bool PrivateLink,string userID)
-        //{
-        //    Link = link;
-        //    this.PrivateLink = PrivateLink;
-        //    UserID = userID;
-        //}
     }
 }

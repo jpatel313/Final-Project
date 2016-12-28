@@ -39,14 +39,44 @@ namespace FinalProjectAlpha.Controllers
             //Only display if archive entity is marked public.
             foreach (var item in archiveList)
             {
-                if (item.Link == Link && item.PrivateLink==false)
+                if (item.Link == Link && item.PrivateLink == false)
                 {//sends archive to page
                     ViewBag.Archive = item;
+                }
+                else
+                    RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+        //New view to display details of one private archive.
+        [Authorize]
+        public ActionResult _PrivateDetails(string Link)   
+        {
+            //Create Entity ORM object to access DB.
+            waybackdbEntities dbContext = new waybackdbEntities();
+
+            //Create list.  
+            List<Archive> archiveList = dbContext.Archives.ToList();
+            //Get the current logged in user id.
+            string CurrentUserId = User.Identity.GetUserId();
+
+            // Checks each item in db for matching primary key(Link) 
+            //Only viewable to user logged in. [View "_PrivateDetails" displays button if bool is true]
+            foreach (var item in archiveList)
+            {   
+                  
+                if (item.Link == Link && item.UserID == CurrentUserId)
+
+                {
+                    ViewBag.Archive = item;
+                }
+                else if (item.Link == Link && item.UserID != CurrentUserId)
+                {   //Redirects to homepage for now.   
+                    RedirectToAction("Index", "Home");
                 }
             }
             return View();
         }
-        
         //This is the page that contains the form for adding new projecct pages.
         public ActionResult New()
         {

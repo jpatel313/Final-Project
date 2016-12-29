@@ -28,24 +28,25 @@
     }
 
 
-    <h1>Archive your Project</h1>
+                                        <h1>Archive your Project</h1>
 
     <div class="col-sm-12">
         <div class="container-fluid">
             <div class="form-horizontal">
-                <form id="save-proj" action="Save" method="post">
-                    <h3>
+                
+                    <form id="save-proj" action="Save" method="post">
+
                         <label for="basic-url">Your Project Name:</label>
                         <br />
                         <div class="input-group">
-                            <input type="text" class="form-control" id="pname" aria-describedby="basic-addon3" name="ProjectName" />
+                            <input type="text" class="form-control" id="projectname" aria-describedby="basic-addon3" name="ProjectName" />
                         </div>
                         <br />
 
                         <label for="basic-url">Your Team Name:</label>
                         <br />
                         <div class="input-group">
-                            <input type="text" class="form-control" id="team" aria-describedby="basic-addon3" name="TeamName" />
+                            <input type="text" class="form-control" id="teamname" aria-describedby="basic-addon3" name="TeamName" />
                         </div>
                         <br />
 
@@ -80,15 +81,15 @@
                         <br />
                         <!--Button to allow user to choose if project is public.Validated in archive model-->
                         <div class="input-group">
-                            @Html.RadioButtonFor(model => model.PrivateLink, "false"@*, new { id = "public" }*@)Allow others to see your project!
-                            <br />        
-                            @Html.RadioButtonFor(model => model.PrivateLink, "true"@*, new { id = "private" }*@)Make this project only viewable from your dashboard:(
-                        <br />
-                        </div>
+                            @Html.RadioButtonFor(model => model.PrivateLink, "false", new { @checked = false })Allow others to see your project!
                             <br />
+                            @Html.RadioButtonFor(model => model.PrivateLink, "true") Make the project only viewable from your dashboard:(
+                            <br />
+                        </div>
+                        <br />
 
-                            <input type="submit" id="save" class="btn btn-info " value="Submit">
-</h3>
+                        <input type="submit" id="save" class="btn btn-info " value="Submit">
+              
                 </form>
             </div>
         </div>

@@ -11,6 +11,9 @@ namespace FinalProjectAlpha.Controllers
 {
     public class HomeController : Controller
     {
+        // create ORM obj to access the database
+        waybackdbEntities dbContext = new waybackdbEntities();
+
         public ActionResult Index()
         {
             //Change background image of homepage here.
@@ -27,7 +30,7 @@ namespace FinalProjectAlpha.Controllers
           
             return View();
         }
-
+        
         public ActionResult About()  
         {
             ViewBag.Message = "Your application description page.";
@@ -43,17 +46,21 @@ namespace FinalProjectAlpha.Controllers
         }
         //[HttpGet]
         public ActionResult Search(string searchTerm)
-        {
-            waybackdbEntities dbContext = new waybackdbEntities();      // create ORM obj
-                                                                        //find the archive record(s) and put in the bag
-            ViewBag.Found = dbContext.Archives.Where(x => x.ProjectName.Contains(searchTerm) || x.ShortDesc.Contains(searchTerm) || x.UserID.Contains(searchTerm));
-
-            //check for null in cshtml
+        {            
+            //Displays only links that are marked public(PrivateLink=false)
+            List<Archive> arList = dbContext.Archives.Where(x => x.PrivateLink.Equals(false)).ToList();
+                        
+            //find the archive record(s) and put them in the bag                                    
+            ViewBag.Found = arList.Where(x => x.ProjectName.Contains(searchTerm) || x.ShortDesc.Contains(searchTerm) || x.UserID.Contains(searchTerm));
+            
+            //sort search results by default
+            //ViewBag.Found.Sort("ArchiveDate", "Descending");
+           
+            //check for null in cshtml (if viewbag.Found = empty, show errorMessage)
             ViewBag.errorMessage = "No Project with " + searchTerm + " in the name or description could be found.  Try another search.";
 
             return View("Index");
         }
-
         public ActionResult Dashboard(string Link)
         {   
             //Change background image here.

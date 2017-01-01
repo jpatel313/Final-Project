@@ -77,7 +77,7 @@ namespace FinalProjectAlpha.Controllers
             }
             return View();
         }
-        //This is the page that contains the form for adding new projecct pages.
+        //This is the page that contains the form for adding new project pages.
         public ActionResult New()
         {
             //Background image can be changed from here.
@@ -110,7 +110,7 @@ namespace FinalProjectAlpha.Controllers
             // bool PrivateLink = false;
             
             //Create the Archive object to determine what will be sent to DB from Project/New. 
-            Archive archive = new Archive(Link, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot, UserID, TeamName, ProjectName, PrivateLink);
+            Archive archive = new Archive(Link, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot, UserID, ProjectName, TeamName, PrivateLink);
 
             //Adds changes to DB via Entity ORM.
             dbContext.Archives.Add(archive);

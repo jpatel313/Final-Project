@@ -4961,9 +4961,9 @@ a.badge:focus {
   margin-bottom: 30px;
   color: inherit;
   background-color: #eee;
-  -moz-background-size: 100% 100%;
-  -webkit-background-size: cover;
-  -o-background-size: 100% 100%;
+  background-size: auto 100%;
+  background-position: center center;
+    
 }
 .jumbotron h1,
 .jumbotron .h1 {

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using FinalProjectAlpha.Models;
+using FinalProjectAlpha.ViewModels;
 using System.Collections.Generic; /// <summary>
 /// ADDED COLLECTIONS/Generic for the edit and delete actions
 /// </summary>

@@ -5,14 +5,14 @@ namespace FinalProjectAlpha.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<FinalProjectAlpha.Models.waybackdbEntities>
+    internal sealed class Configuration : DbMigrationsConfiguration<FinalProjectAlpha.ViewModels.waybackdbEntities>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(FinalProjectAlpha.Models.waybackdbEntities context)
+        protected override void Seed(FinalProjectAlpha.ViewModels.waybackdbEntities context)
         {
             //  This method will be called after migrating to the latest version.
 

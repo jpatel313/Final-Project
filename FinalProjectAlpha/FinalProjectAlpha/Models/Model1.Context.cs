@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FinalProjectAlpha.Models
+namespace FinalProjectAlpha.ViewModels
 {
     using System;
     using System.Data.Entity;

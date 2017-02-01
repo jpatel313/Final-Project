@@ -221,6 +221,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Models\ArchiveFormViewModel.cs" />
     <Compile Include="Models\AspNetUser.cs">
       <DependentUpon>Model1.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -349,12 +350,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Project\New.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\EditPage.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Home\_Sort.cshtml" />
     <Content Include="Views\Project\_PrivateDetails.cshtml" />
+    <Content Include="Views\Project\ArchiveForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,4 @@
-﻿using FinalProjectAlpha.Models;
+﻿using FinalProjectAlpha.ViewModels;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -20,11 +20,8 @@ using GrabzIt.Parameters;
 namespace FinalProjectAlpha.Controllers
 {
     //[PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-    
     public class ProjectController : Controller
     {
-
-
         #region Actions
 
         public ActionResult Details(string Link)   // returns one archived website in iframe, with details
@@ -82,46 +79,54 @@ namespace FinalProjectAlpha.Controllers
         {
             //Background image can be changed from here.
             ViewBag.background = @Url.Content("~/Content/NewProject.gif");
-            return View();
+            return View("ArchiveForm");
         }
-       
-       //Save() saves one Archive object into the database
-        public ActionResult Save(string ProjectName, string TeamName, string Link, string RepoLink, string ShortDesc, string LongDesc, bool PrivateLink)
+        //Save() saves one Archive object into the database
+        // Refactored to use ViewModel.  This will prevent the Archive model from breaking on rebuild and fix the problem wherein some projects did not save to db correctly.
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Save(Archive archive)
         {
             //Create Entity ORM object to access DB.
             waybackdbEntities dbContext = new waybackdbEntities();
+            
+            
+            //Send user back to blank form with an empty archive obj if model state is not valid
+            if (!ModelState.IsValid)
+            {
+                ArchiveFormViewModel viewModel = new ArchiveFormViewModel(archive);
+                return View("ArchiveForm", viewModel);
+            }
+
 
             //Savelink() tries to save link and returns false if error... changes ViewBag.errorMessage, accordingly 
-            if ((saveLink(Link)) == false) //If we get an error (false)     refactor to try/catch
+            if ((saveLink(archive.Link)) == false) //If we get an error (false)     refactor to try/catch
             {
-                return View("New");
+                return View("ArchiveForm");     //renders ArchiveForm view 
             }
 
             //Get the url that was archived using the wayback API.
-            string ArchiveLink = archiveLink(Link);
+            string ArchiveLink = archiveLink(archive.Link);
 
             //Call screenshot method, input users website link.
-            var SnapShot = GetBytesFromImage(Link);
+            var SnapShot = GetBytesFromImage(archive.Link);
 
             //Gets currently logged in user.
             string UserID = User.Identity.GetUserId();
 
-            //Change this hardcode after public/private option added:
-            // bool PrivateLink = false;
-            
             //Create the Archive object to determine what will be sent to DB from Project/New. 
-            Archive archive = new Archive(Link, ArchiveLink, RepoLink, ShortDesc, LongDesc, SnapShot, UserID, ProjectName, TeamName, PrivateLink);
+            archive = new Archive(archive.Link, ArchiveLink, archive.RepoLink, archive.ShortDesc, archive.LongDesc, SnapShot, UserID, archive.ProjectName, archive.TeamName, archive.PrivateLink);
 
             //Adds changes to DB via Entity ORM.
             dbContext.Archives.Add(archive);
 
             //Saves changes to DB via Entity ORM.
             dbContext.SaveChanges();
-            
+
             //send user to Project/Details?Link=myurl.com
             return RedirectToAction("Details", "Project", new { Link = archive.Link });
         }
-
+       
         public ActionResult EditPage(string Link)
         {   
             //Background image can be changed from here.

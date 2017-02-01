@@ -1,0 +1,86 @@
+﻿@model FinalProjectAlpha.ViewModels.ArchiveFormViewModel
+@{
+    ViewBag.Title = "Archive Form";
+}
+<link href="~/Content/formcss/style.css" rel="stylesheet" />
+<style type="text/css">
+           body  {
+                background-image: url(@ViewBag.background);
+                background-repeat: repeat;
+                background-size: cover;
+                color: #555;
+            }
+</style>
+<head>
+    <meta name="NewProject" content="width=device-width" />
+    <title>New Project</title>
+</head>
+
+@*displays alert in case of any errors (in SaveLink and Check- methods)*@
+@if (!(string.IsNullOrEmpty(ViewBag.errormessage)))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.errormessage
+    </div>
+}
+
+<h1>Archive your Project</h1>
+
+<h2>Archive Form</h2>
+
+
+@*Html helper to render form markup*@
+@using (Html.BeginForm("Save", "Project"))
+{
+    @*This should display an unordered list of client-side validation errors, if the form is submitted before validation is successful... TODO: needs attention*@
+    @Html.ValidationSummary(true, "Please fix the following errors.", new { @class = "field-validation-error" })
+
+    @*Each <div> is a form field for the property named in its respective lambda expressions*@
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProjectName)
+        @Html.TextBoxFor(m => m.ProjectName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ProjectName)
+    </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Link)
+            @Html.TextBoxFor(m => m.Link, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Link)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.TeamName)
+            @Html.TextBoxFor(m => m.TeamName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.TeamName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ShortDesc)
+            @Html.TextBoxFor(m => m.ShortDesc, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ShortDesc)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.LongDesc)
+            @Html.TextBoxFor(m => m.LongDesc, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.LongDesc)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.RepoLink)
+            @Html.TextBoxFor(m => m.RepoLink, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.RepoLink)
+        </div>
+        <br />
+                        <!--Button to allow user to choose if project is public.Validated in archive model-->
+        <div class="input-group">
+            @Html.RadioButtonFor(model => model.PrivateLink, "false", new { @checked = false })Allow others to see your project!
+            <br />
+            @Html.RadioButtonFor(model => model.PrivateLink, "true") Make the project only viewable from your dashboard:(
+            <br />
+        </div>
+        <br />
+        @*AntiForgeryToken must match user cookie when form is sent.. See controller for paired annotation (/Project/Save)*@
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@*Necessary Jquery Validation bundle.  See also addition to BundleConfig.*@
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

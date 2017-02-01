@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    color: #555;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -36,4 +37,11 @@ textarea {
     display: inline;
     right: 0;
     left: auto;
+}
+/*Set style for field validation errors (jquery unobtrusive validation)*/
+.field-validation-error {
+    color: #d8524f;
+}
+.input-validation-error {
+    border: 2px solid #f05956;
 }

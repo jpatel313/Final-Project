@@ -137,9 +137,11 @@ namespace FinalProjectAlpha.Controllers
 
             //Finds one matching archive
             Archive archive = dbContext.Archives.Find(Link);
- 
+
+            //Refactored to use ViewModel.
+            ArchiveFormViewModel viewModel = new ArchiveFormViewModel(archive);
             //sends the archive to the view
-            return View(archive);
+            return View("EditPage", archive);
         }
 
         //Action method that edits archive's fields in DB. 

@@ -31,11 +31,20 @@ namespace FinalProjectAlpha.Controllers
             return View();
         }
         
-        public ActionResult About()  
+        public ActionResult Developers()  
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Meet the developers!";
 
-            return View();
+            ViewBag.Lola = @Url.Content("~/Content/lola.jpg");
+
+            ViewBag.Tom = @Url.Content("~/Content/tom.jpg");
+
+            ViewBag.Mary = @Url.Content("~/Content/mary.jpg");
+
+            ViewBag.Jay = @Url.Content("~/Content/jay.jpg");
+
+            return View("Developers");
+
         }
 
         public ActionResult Contact()

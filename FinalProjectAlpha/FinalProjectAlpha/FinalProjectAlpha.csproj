@@ -252,10 +252,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dashboard.jpg" />
+    <Content Include="Content\jay.jpg" />
     <Content Include="Content\Keeper1.jpg" />
     <Content Include="Content\KeepProjectsHome.jpg" />
+    <Content Include="Content\lola.jpg" />
+    <Content Include="Content\mary.jpg" />
     <Content Include="Content\NewProject.gif" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\tom.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -327,7 +331,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Developers.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
